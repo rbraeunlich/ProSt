@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-Name: ProSt EJB Implementation
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Version: 0.0.1
+Bundle-ManifestVersion: 2
+Import-Package: javax.ejb,
+ de.blogspot.wrongtracks.prost.prost-ejb-api,
+ org.activiti.engine;version="[5.12.1,6.0.0)"
+Bundle-SymbolicName: de.blogspot.wrongtracks.prost.prost-ejb
+Bundle-ClassPath: .
