@@ -15,7 +15,6 @@ import de.blogspot.wrongtracks.prost.ejb.api.HistoryEJBRemote;
 import de.blogspot.wrongtracks.prost.ejb.transfer.HistoricFormPropertyInfo;
 
 @Stateless(name = "HistoryEJB")
-@Local
 public class HistoryEJB implements HistoryEJBRemote {
 
 	private HistoryService historyService;

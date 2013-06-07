@@ -34,7 +34,6 @@ import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyTransfer;
 import de.blogspot.wrongtracks.prost.ejb.transfer.impl.FormPropertyConverter;
 
 @Stateless(name = "TaskEJB")
-@Local
 public class TaskEJB implements TaskEJBRemote {
 
 	private TaskService taskService;

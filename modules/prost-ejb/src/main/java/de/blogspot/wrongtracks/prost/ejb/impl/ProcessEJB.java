@@ -25,7 +25,6 @@ import de.blogspot.wrongtracks.prost.ejb.transfer.impl.ProcessInformationBuilder
  * Session Bean implementation class ProcessEJB
  */
 @Stateless(name = "ProcessEJB")
-@Local
 public class ProcessEJB implements ProcessEJBRemote {
 
 	private RepositoryService repositoryService;
