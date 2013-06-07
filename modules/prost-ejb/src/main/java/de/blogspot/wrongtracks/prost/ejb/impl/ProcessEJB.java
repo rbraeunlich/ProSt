@@ -1,4 +1,4 @@
-package de.blogspot.wrongtracks.ejb.impl;
+package de.blogspot.wrongtracks.prost.ejb.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,10 +16,10 @@ import org.activiti.engine.form.FormProperty;
 import org.activiti.engine.repository.ProcessDefinition;
 
 import de.blogspot.wrongtracks.prost.ejb.api.ProcessEJBRemote;
-import de.blogspot.wrongtracks.ejb.transfer.impl.FormPropertyConverter;
 import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyTransfer;
 import de.blogspot.wrongtracks.prost.ejb.transfer.ProcessInformation;
-import de.blogspot.wrongtracks.ejb.transfer.impl.ProcessInformationBuilder;
+import de.blogspot.wrongtracks.prost.ejb.transfer.impl.FormPropertyConverter;
+import de.blogspot.wrongtracks.prost.ejb.transfer.impl.ProcessInformationBuilder;
 
 /**
  * Session Bean implementation class ProcessEJB

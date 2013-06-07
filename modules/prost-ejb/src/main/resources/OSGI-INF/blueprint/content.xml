@@ -1,24 +1,24 @@
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
 	xmlns:ext="http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.0.0">
 
-	<bean id="historyEJB" class="de.blogspot.wrongtracks.ejb.impl.HistoryEJB">
+	<bean id="historyEJB" class="de.blogspot.wrongtracks.prost.ejb.impl.HistoryEJB">
 		<property name="historyService" ref="historyServiceRef" />
 	</bean>
 
-	<bean id="processEJB" class="de.blogspot.wrongtracks.ejb.impl.ProcessEJB">
+	<bean id="processEJB" class="de.blogspot.wrongtracks.prost.ejb.impl.ProcessEJB">
 		<property name="runtimeSerivce" ref="runtimeServiceRef" />
 		<property name="formService" ref="formServiceRef" />
 		<property name="repositoryService" ref="repositoryServiceRef" />
 	</bean>
 
-	<bean id="taskEJB" class="de.blogspot.wrongtracks.ejb.impl.TaskEJB">
+	<bean id="taskEJB" class="de.blogspot.wrongtracks.prost.ejb.impl.TaskEJB">
 		<property name="formService" ref="formServiceRef" />
 		<property name="repositoryService" ref="repositoryServiceRef" />
 		<property name="runtimeService" ref="runtimeServiceRef" />
 		<property name="taskService" ref="taskServiceRef" />
 	</bean>
 	
-	<bean id="processInformationBuilder" class="de.blogspot.wrongtracks.ejb.transfer.impl.ProcessInformationBuilder">
+	<bean id="processInformationBuilder" class="de.blogspot.wrongtracks.prost.ejb.transfer.impl.ProcessInformationBuilder">
 		<property name="historyService" ref="historyServiceRef" />
 	</bean>
 

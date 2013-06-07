@@ -1,4 +1,4 @@
-package de.blogspot.wrongtracks.ejb.impl;
+package de.blogspot.wrongtracks.prost.ejb.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
