@@ -5,5 +5,5 @@ ProSt or ProzessSteuerung is a project which uses Activiti as process engine, OS
 
 Special Thanks to:
 
-Florian B. for the name
-Katrin P. for the icon
+* Florian B. for the name
+* Katrin P. for the icon
