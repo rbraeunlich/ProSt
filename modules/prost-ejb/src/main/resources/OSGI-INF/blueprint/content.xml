@@ -8,6 +8,7 @@
 	<bean id="processEJB" class="de.blogspot.wrongtracks.ejb.impl.ProcessEJB">
 		<property name="runtimeSerivce" ref="runtimeServiceRef" />
 		<property name="formService" ref="formServiceRef" />
+		<property name="repositoryService" ref="repositoryServiceRef" />
 	</bean>
 
 	<bean id="taskEJB" class="de.blogspot.wrongtracks.ejb.impl.TaskEJB">
@@ -15,6 +16,10 @@
 		<property name="repositoryService" ref="repositoryServiceRef" />
 		<property name="runtimeService" ref="runtimeServiceRef" />
 		<property name="taskService" ref="taskServiceRef" />
+	</bean>
+	
+	<bean id="processInformationBuilder" class="de.blogspot.wrongtracks.ejb.transfer.impl.ProcessInformationBuilder">
+		<property name="historyService" ref="historyServiceRef" />
 	</bean>
 
 	<reference id="historyServiceRef" interface="org.activiti.engine.HistoryService" />

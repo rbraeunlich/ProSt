@@ -3,8 +3,11 @@ Bundle-Name: ProSt EJB Implementation
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Version: 0.0.1
 Bundle-ManifestVersion: 2
-Import-Package: javax.ejb,
- de.blogspot.wrongtracks.prost.prost-ejb-api,
- org.activiti.engine;version="[5.12.1,6.0.0)"
+Import-Package: de.blogspot.wrongtracks.prost.prost-ejb-api,
+ javax.ejb,
+ org.activiti.engine;version="[5.12.1,6.0.0)",
+ org.activiti.engine.form;version="[5.12.1,6.0.0)",
+ org.activiti.engine.impl.bpmn.diagram;version="[5.12.1,6.0.0)",
+ org.activiti.bpmn.model;version="[5.12.1,6.0.0)",
 Bundle-SymbolicName: de.blogspot.wrongtracks.prost.prost-ejb
 Bundle-ClassPath: .

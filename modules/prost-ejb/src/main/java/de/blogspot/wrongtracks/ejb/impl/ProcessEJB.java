@@ -10,15 +10,16 @@ import javax.ejb.Local;
 import javax.ejb.Stateless;
 
 import org.activiti.engine.FormService;
+import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.form.FormProperty;
 import org.activiti.engine.repository.ProcessDefinition;
 
 import de.blogspot.wrongtracks.prost.ejb.api.ProcessEJBRemote;
-import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyConverter;
+import de.blogspot.wrongtracks.ejb.transfer.impl.FormPropertyConverter;
 import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyTransfer;
 import de.blogspot.wrongtracks.prost.ejb.transfer.ProcessInformation;
-import de.blogspot.wrongtracks.prost.ejb.transfer.ProcessInformationBuilder;
+import de.blogspot.wrongtracks.ejb.transfer.impl.ProcessInformationBuilder;
 
 /**
  * Session Bean implementation class ProcessEJB
@@ -27,13 +28,12 @@ import de.blogspot.wrongtracks.prost.ejb.transfer.ProcessInformationBuilder;
 @Local
 public class ProcessEJB implements ProcessEJBRemote {
 
-	@Inject
-	private List<ProcessDefinition> processDefinitions;
+	private RepositoryService repositoryService;
 
 	private FormService formService;
 
 	private RuntimeService runtimeService;
-	@Inject
+
 	private ProcessInformationBuilder processInfoBuilder;
 
 	/**
@@ -44,6 +44,8 @@ public class ProcessEJB implements ProcessEJBRemote {
 
 	@Override
 	public Map<String, String> getDeployedProcesses() {
+		List<ProcessDefinition> processDefinitions = repositoryService
+				.createProcessDefinitionQuery().latestVersion().list();
 		Map<String, String> result = new HashMap<String, String>(
 				processDefinitions.size());
 		for (ProcessDefinition definition : processDefinitions) {
@@ -79,13 +81,17 @@ public class ProcessEJB implements ProcessEJBRemote {
 		return Collections.unmodifiableList(processInfoBuilder
 				.buildProcessInformationForAllHistoricProcesses());
 	}
-	
-	public void setRuntimeService(RuntimeService runtimeService){
+
+	public void setRuntimeService(RuntimeService runtimeService) {
 		this.runtimeService = runtimeService;
 	}
-	
-	public void setFormService(FormService formService){
+
+	public void setFormService(FormService formService) {
 		this.formService = formService;
+	}
+
+	public void setRepositoryService(RepositoryService repositoryService) {
+		this.repositoryService = repositoryService;
 	}
 
 }

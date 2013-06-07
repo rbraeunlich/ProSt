@@ -12,6 +12,7 @@ import java.util.Map;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 
+import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.engine.ActivitiException;
 import org.activiti.engine.FormService;
 import org.activiti.engine.RepositoryService;
@@ -19,7 +20,6 @@ import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.form.FormProperty;
 import org.activiti.engine.impl.bpmn.diagram.ProcessDiagramGenerator;
-import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
 import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.IdentityLink;
 import org.activiti.engine.task.IdentityLinkType;
@@ -28,25 +28,23 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import de.blogspot.wrongtracks.prost.ejb.api.TaskEJBRemote;
-import de.blogspot.wrongtracks.prost.event.TaskBesitzerGewechseltEvent;
+//import de.blogspot.wrongtracks.prost.event.TaskBesitzerGewechseltEvent;
 import de.blogspot.wrongtracks.prost.ejb.exception.TaskException;
-import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyConverter;
+import de.blogspot.wrongtracks.ejb.transfer.impl.FormPropertyConverter;
 import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyTransfer;
 
 @Stateless(name = "TaskEJB")
 @Local
 public class TaskEJB implements TaskEJBRemote {
 
-	@Inject
 	private TaskService taskService;
-	@Inject
 	private FormService formService;
-	@Inject
 	private RuntimeService runtimeService;
-	@Inject
 	private RepositoryService repositoryService;
-	@Inject
-	private Event<TaskBesitzerGewechseltEvent> taskBesitzerGewechseltEvent;
+
+	// @Inject
+	// FIXME eventing!
+	// private Event<TaskBesitzerGewechseltEvent> taskBesitzerGewechseltEvent;
 
 	/**
 	 * @return Map<taskId, taskName>
@@ -67,7 +65,8 @@ public class TaskEJB implements TaskEJBRemote {
 			throws TaskException {
 		try {
 			taskService.claim(taskId, user);
-			taskBesitzerGewechseltEvent.fire(new TaskBesitzerGewechseltEvent());
+			// taskBesitzerGewechseltEvent.fire(new
+			// TaskBesitzerGewechseltEvent());
 		} catch (ActivitiException ae) {
 			pruefeObGrundTaskWegIstUndWerfeTaskException(ae);
 			throw ae;
@@ -111,14 +110,13 @@ public class TaskEJB implements TaskEJBRemote {
 				.createProcessInstanceQuery()
 				.processInstanceId(processInstanceId).singleResult();
 
-		ProcessDefinitionEntity processDefinition = (ProcessDefinitionEntity) repositoryService
-				.getProcessDefinition(processInstance.getProcessDefinitionId());
+		BpmnModel model = repositoryService.getBpmnModel(processInstance
+				.getProcessDefinitionId());
 
 		InputStream definitionImageStream = null;
-		if (processDefinition != null
-				&& processDefinition.isGraphicalNotationDefined()) {
+		if (model != null) {
 			definitionImageStream = ProcessDiagramGenerator.generateDiagram(
-					processDefinition, "png", runtimeService
+					model, "png", runtimeService
 							.getActiveActivityIds(processInstance.getId()));
 		}
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -177,7 +175,7 @@ public class TaskEJB implements TaskEJBRemote {
 		 * null) kein Event. Darum muss ich mein eigenes Event benutzen um die
 		 * GUI zum Updaten zu bewegen
 		 */
-		taskBesitzerGewechseltEvent.fire(new TaskBesitzerGewechseltEvent());
+		// taskBesitzerGewechseltEvent.fire(new TaskBesitzerGewechseltEvent());
 	}
 
 	private void pruefeObGrundTaskWegIstUndWerfeTaskException(
@@ -215,5 +213,5 @@ public class TaskEJB implements TaskEJBRemote {
 	public void setRepositoryService(RepositoryService repositoryService) {
 		this.repositoryService = repositoryService;
 	}
-	
+
 }
