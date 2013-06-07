@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-Name: ActivitiEngineBlueprintWrapper
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Vendor: data experts gmbh
+Bundle-Version: 1.0.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: de.data.experts.activiti.ActivitiEngineBlueprintWrapper
+Bundle-ClassPath: .
+Import-Package: org.activiti.engine;version="[5.12.1,6.0.0)",
+ org.activiti.osgi.blueprint,
+ org.h2.jdbcx;version="[1.0.0,2.0.0)"
+DynamicImport-Package: *

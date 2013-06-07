@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+        <parent>
+            <groupId>de.blogspot.wrongtracks.prost</groupId>
+            <artifactId>prost-root</artifactId>
+            <relativePath>../..</relativePath>
+            <version>0.0.1-SNAPSHOT</version>
+        </parent>
+	<artifactId>activiti-engine-blueprint-wrapper</artifactId>
+	<packaging>jar</packaging>
+	<dependencies>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-engine</artifactId>
+			<version>${activiti-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-osgi</artifactId>
+			<version>${activiti-version}</version>
+		</dependency>
+	</dependencies>
+</project>
