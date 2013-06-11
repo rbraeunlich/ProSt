@@ -17,8 +17,6 @@ public class ProcessInformation implements Serializable {
 	private String processId;
 	private Date startTime;
 	private Date endTime;
-	// FIXME Student ist zu domänenspezifisch, das muss geändert werden
-	private String student;
 	private List<TaskInformation> taskInfos = new ArrayList<TaskInformation>();
 
 	public void setProcessId(String id) {
@@ -43,14 +41,6 @@ public class ProcessInformation implements Serializable {
 
 	public Date getEndTime() {
 		return endTime;
-	}
-
-	public void setStudent(String student) {
-		this.student = student;
-	}
-
-	public String getStudent() {
-		return student;
 	}
 
 	public List<TaskInformation> getTaskInfos() {
