@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
+import de.blogspot.wrongtracks.prost.ejb.transfer.HistoricFormPropertyInfo;
 import de.blogspot.wrongtracks.prost.ejb.transfer.HistoricFormPropertyInfoImpl;
 
 /**
@@ -22,9 +23,9 @@ public interface HistoryEJBRemote {
 	 * @param taskId
 	 * @return Liste von {@link HistoricFormPropertyInfoImpl}
 	 */
-	List<HistoricFormPropertyInfoImpl> getHistoricFormPropertyDataForProcess(String processId);
+	List<HistoricFormPropertyInfo> getHistoricFormPropertyDataForProcess(String processId);
 
-	List<HistoricFormPropertyInfoImpl> getHistoricFormPropertyDataForTask(
+	List<HistoricFormPropertyInfo> getHistoricFormPropertyDataForTask(
 			String taskId);
 
 }

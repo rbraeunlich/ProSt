@@ -6,7 +6,7 @@ import java.util.Map;
 import javax.ejb.Remote;
 
 import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyTransfer;
-import de.blogspot.wrongtracks.prost.ejb.transfer.ProcessInformationImpl;
+import de.blogspot.wrongtracks.prost.ejb.transfer.ProcessInformation;
 
 /**
  * Bean zur Abfrage von Daten über Prozesse.
@@ -45,10 +45,10 @@ public interface ProcessEJBRemote {
 
 	/**
 	 * Liefert Informationen zu allen Prozesses (laufend oder abgeschlossen) in
-	 * Form von {@link ProcessInformationImpl}.
+	 * Form von {@link ProcessInformation}.
 	 * 
-	 * @return Liste mit {@link ProcessInformationImpl} oder leere Liste, bei keinen
+	 * @return Liste mit {@link ProcessInformation} oder leere Liste, bei keinen
 	 *         Prozessen.
 	 */
-	public List<ProcessInformationImpl> getProcessInformationForAllProcesses();
+	public List<ProcessInformation> getProcessInformationForAllProcesses();
 }

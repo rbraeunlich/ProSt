@@ -17,8 +17,8 @@ public interface ProcessInformation {
 
 	Date getEndTime();
 
-	List<TaskInformationImpl> getTaskInfos();
+	List<TaskInformation> getTaskInfos();
 
-	void setTaskInfos(List<TaskInformationImpl> taskInfos);
+	void setTaskInfos(List<TaskInformation> taskInfos);
 
 }

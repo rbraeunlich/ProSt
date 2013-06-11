@@ -17,7 +17,7 @@ public class ProcessInformationImpl implements Serializable, ProcessInformation 
 	private String processId;
 	private Date startTime;
 	private Date endTime;
-	private List<TaskInformationImpl> taskInfos = new ArrayList<TaskInformationImpl>();
+	private List<TaskInformation> taskInfos = new ArrayList<TaskInformation>();
 
 	@Override
 	public void setProcessId(String id) {
@@ -50,12 +50,12 @@ public class ProcessInformationImpl implements Serializable, ProcessInformation 
 	}
 
 	@Override
-	public List<TaskInformationImpl> getTaskInfos() {
+	public List<TaskInformation> getTaskInfos() {
 		return taskInfos;
 	}
 
 	@Override
-	public void setTaskInfos(List<TaskInformationImpl> taskInfos) {
+	public void setTaskInfos(List<TaskInformation> taskInfos) {
 		this.taskInfos = taskInfos;
 	}
 }
