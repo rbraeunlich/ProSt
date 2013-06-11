@@ -9,7 +9,7 @@ import java.util.Date;
  * @author Ronny Bräunlich
  * 
  */
-public class TaskInformation implements Serializable {
+public class TaskInformationImpl implements Serializable {
 
 	private static final long serialVersionUID = 2547341446985751623L;
 	private Date startDate;

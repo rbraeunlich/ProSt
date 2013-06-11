@@ -11,13 +11,13 @@ import java.util.List;
  * @author Ronny Bräunlich
  * 
  */
-public class ProcessInformation implements Serializable {
+public class ProcessInformationImpl implements Serializable {
 
 	private static final long serialVersionUID = -197009301365294430L;
 	private String processId;
 	private Date startTime;
 	private Date endTime;
-	private List<TaskInformation> taskInfos = new ArrayList<TaskInformation>();
+	private List<TaskInformationImpl> taskInfos = new ArrayList<TaskInformationImpl>();
 
 	public void setProcessId(String id) {
 		this.processId = id;
@@ -43,11 +43,11 @@ public class ProcessInformation implements Serializable {
 		return endTime;
 	}
 
-	public List<TaskInformation> getTaskInfos() {
+	public List<TaskInformationImpl> getTaskInfos() {
 		return taskInfos;
 	}
 
-	public void setTaskInfos(List<TaskInformation> taskInfos) {
+	public void setTaskInfos(List<TaskInformationImpl> taskInfos) {
 		this.taskInfos = taskInfos;
 	}
 }

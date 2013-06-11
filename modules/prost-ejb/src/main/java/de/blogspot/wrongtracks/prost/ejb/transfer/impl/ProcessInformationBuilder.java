@@ -7,8 +7,8 @@ import org.activiti.engine.HistoryService;
 import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.history.HistoricTaskInstance;
 
-import de.blogspot.wrongtracks.prost.ejb.transfer.ProcessInformation;
-import de.blogspot.wrongtracks.prost.ejb.transfer.TaskInformation;
+import de.blogspot.wrongtracks.prost.ejb.transfer.ProcessInformationImpl;
+import de.blogspot.wrongtracks.prost.ejb.transfer.TaskInformationImpl;
 
 /**
  * Klasse, welche Informationen zu Prozessen zusammen sammelt.
@@ -21,20 +21,20 @@ public class ProcessInformationBuilder {
 	private HistoryService historyService;
 
 	/**
-	 * Erzeugt {@link ProcessInformation} für alle Prozesse, welche in der
+	 * Erzeugt {@link ProcessInformationImpl} für alle Prozesse, welche in der
 	 * Prozessengine laufen oder irgendwann mal liefen.
 	 * 
-	 * @return Liste mit {@link ProcessInformation} oder leere Liste, fall noch
+	 * @return Liste mit {@link ProcessInformationImpl} oder leere Liste, fall noch
 	 *         nie ein Prozess gestartet wurde.
 	 */
-	public List<ProcessInformation> buildProcessInformationForAllHistoricProcesses() {
+	public List<ProcessInformationImpl> buildProcessInformationForAllHistoricProcesses() {
 		List<HistoricProcessInstance> allHistoricProcesses = getAllHistoricProcesses();
 
-		List<ProcessInformation> processInfos = new ArrayList<ProcessInformation>(
+		List<ProcessInformationImpl> processInfos = new ArrayList<ProcessInformationImpl>(
 				allHistoricProcesses.size());
 
 		for (HistoricProcessInstance historicInstance : allHistoricProcesses) {
-			ProcessInformation processInfo = createProcessInfo(historicInstance);
+			ProcessInformationImpl processInfo = createProcessInfo(historicInstance);
 
 			createAndAssignTaskInfos(processInfo);
 
@@ -44,18 +44,18 @@ public class ProcessInformationBuilder {
 	}
 
 	/**
-	 * Erzeugt {@link TaskInformation} Objekte zum Prozess der info und setzt
-	 * diese an der {@link ProcessInformation}.
+	 * Erzeugt {@link TaskInformationImpl} Objekte zum Prozess der info und setzt
+	 * diese an der {@link ProcessInformationImpl}.
 	 * 
 	 * @param processInfo
 	 */
-	private void createAndAssignTaskInfos(ProcessInformation processInfo) {
+	private void createAndAssignTaskInfos(ProcessInformationImpl processInfo) {
 		List<HistoricTaskInstance> historicTasks = historyService
 				.createHistoricTaskInstanceQuery()
 				.processInstanceId(processInfo.getProcessId()).list();
-		List<TaskInformation> taskInfos = new ArrayList<TaskInformation>();
+		List<TaskInformationImpl> taskInfos = new ArrayList<TaskInformationImpl>();
 		for (HistoricTaskInstance historicTaskInstance : historicTasks) {
-			TaskInformation taskInfo = new TaskInformation();
+			TaskInformationImpl taskInfo = new TaskInformationImpl();
 			taskInfo.setBearbeiter(historicTaskInstance.getAssignee());
 			taskInfo.setId(historicTaskInstance.getId());
 			taskInfo.setName(historicTaskInstance.getName());
@@ -67,15 +67,15 @@ public class ProcessInformationBuilder {
 	}
 
 	/**
-	 * Erzeugt eine {@link ProcessInformation} für die übergebene
+	 * Erzeugt eine {@link ProcessInformationImpl} für die übergebene
 	 * {@link HistoricProcessInstance}.
 	 * 
 	 * @param historicInstance
 	 * @return
 	 */
-	private ProcessInformation createProcessInfo(
+	private ProcessInformationImpl createProcessInfo(
 			HistoricProcessInstance historicInstance) {
-		ProcessInformation processInfo = new ProcessInformation();
+		ProcessInformationImpl processInfo = new ProcessInformationImpl();
 		processInfo.setProcessId(historicInstance.getId());
 		processInfo.setStartTime(historicInstance.getStartTime());
 		processInfo.setEndTime(historicInstance.getEndTime());

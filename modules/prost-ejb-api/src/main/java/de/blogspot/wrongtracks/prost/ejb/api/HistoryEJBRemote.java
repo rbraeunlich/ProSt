@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.ejb.Remote;
 
-import de.blogspot.wrongtracks.prost.ejb.transfer.HistoricFormPropertyInfo;
+import de.blogspot.wrongtracks.prost.ejb.transfer.HistoricFormPropertyInfoImpl;
 
 /**
  * Bean zur Abfrage von historischen Daten.
@@ -20,11 +20,11 @@ public interface HistoryEJBRemote {
 	 * beinhaltet die aktuell gültigen Daten, sowie alte, überschriebene.
 	 * 
 	 * @param taskId
-	 * @return Liste von {@link HistoricFormPropertyInfo}
+	 * @return Liste von {@link HistoricFormPropertyInfoImpl}
 	 */
-	List<HistoricFormPropertyInfo> getHistoricFormPropertyDataForProcess(String processId);
+	List<HistoricFormPropertyInfoImpl> getHistoricFormPropertyDataForProcess(String processId);
 
-	List<HistoricFormPropertyInfo> getHistoricFormPropertyDataForTask(
+	List<HistoricFormPropertyInfoImpl> getHistoricFormPropertyDataForTask(
 			String taskId);
 
 }

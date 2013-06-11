@@ -16,7 +16,7 @@ import org.activiti.engine.repository.ProcessDefinition;
 
 import de.blogspot.wrongtracks.prost.ejb.api.ProcessEJBRemote;
 import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyTransfer;
-import de.blogspot.wrongtracks.prost.ejb.transfer.ProcessInformation;
+import de.blogspot.wrongtracks.prost.ejb.transfer.ProcessInformationImpl;
 import de.blogspot.wrongtracks.prost.ejb.transfer.impl.FormPropertyConverter;
 import de.blogspot.wrongtracks.prost.ejb.transfer.impl.ProcessInformationBuilder;
 
@@ -75,7 +75,7 @@ public class ProcessEJB implements ProcessEJBRemote {
 	}
 
 	@Override
-	public List<ProcessInformation> getProcessInformationForAllProcesses() {
+	public List<ProcessInformationImpl> getProcessInformationForAllProcesses() {
 		return Collections.unmodifiableList(processInfoBuilder
 				.buildProcessInformationForAllHistoricProcesses());
 	}

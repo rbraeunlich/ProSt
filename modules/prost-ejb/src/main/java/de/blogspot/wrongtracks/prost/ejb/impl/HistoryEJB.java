@@ -11,21 +11,21 @@ import org.activiti.engine.history.HistoricDetail;
 import org.activiti.engine.history.HistoricFormProperty;
 
 import de.blogspot.wrongtracks.prost.ejb.api.HistoryEJBRemote;
-import de.blogspot.wrongtracks.prost.ejb.transfer.HistoricFormPropertyInfo;
+import de.blogspot.wrongtracks.prost.ejb.transfer.HistoricFormPropertyInfoImpl;
 
 @Stateless(name = "HistoryEJB")
 public class HistoryEJB implements HistoryEJBRemote {
 
 	private HistoryService historyService;
 
-	public List<HistoricFormPropertyInfo> getHistoricFormPropertyDataForProcess(
+	public List<HistoricFormPropertyInfoImpl> getHistoricFormPropertyDataForProcess(
 			String processInstanceId) {
 		return Collections
 				.unmodifiableList(findAndConvertHistoricFormPropertyData(processInstanceId));
 	}
 
 	@Override
-	public List<HistoricFormPropertyInfo> getHistoricFormPropertyDataForTask(
+	public List<HistoricFormPropertyInfoImpl> getHistoricFormPropertyDataForTask(
 			String taskId) {
 		String processInstanceId = historyService
 				.createHistoricTaskInstanceQuery().taskId(taskId)
@@ -35,9 +35,9 @@ public class HistoryEJB implements HistoryEJBRemote {
 
 	}
 
-	private List<HistoricFormPropertyInfo> findAndConvertHistoricFormPropertyData(
+	private List<HistoricFormPropertyInfoImpl> findAndConvertHistoricFormPropertyData(
 			String processInstanceId) {
-		List<HistoricFormPropertyInfo> result = new ArrayList<HistoricFormPropertyInfo>();
+		List<HistoricFormPropertyInfoImpl> result = new ArrayList<HistoricFormPropertyInfoImpl>();
 		List<HistoricDetail> historicFormProperties = historyService
 				.createHistoricDetailQuery()
 				.processInstanceId(processInstanceId).formProperties()
@@ -45,7 +45,7 @@ public class HistoryEJB implements HistoryEJBRemote {
 
 		for (HistoricDetail historicDetail : historicFormProperties) {
 			HistoricFormProperty historicFormProperty = (HistoricFormProperty) historicDetail;
-			HistoricFormPropertyInfo info = new HistoricFormPropertyInfo();
+			HistoricFormPropertyInfoImpl info = new HistoricFormPropertyInfoImpl();
 			info.setId(historicFormProperty.getId());
 			info.setPropertyId(historicFormProperty.getPropertyId());
 			info.setValue(historicFormProperty.getPropertyValue());

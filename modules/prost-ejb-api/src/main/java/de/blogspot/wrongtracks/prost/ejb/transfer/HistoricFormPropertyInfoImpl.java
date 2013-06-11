@@ -10,7 +10,7 @@ import java.util.Date;
  * @author Ronny Bräunlich
  * 
  */
-public class HistoricFormPropertyInfo implements Serializable {
+public class HistoricFormPropertyInfoImpl implements Serializable {
 
 	private static final long serialVersionUID = -7089132808797477417L;
 	private String id;
@@ -58,7 +58,7 @@ public class HistoricFormPropertyInfo implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		HistoricFormPropertyInfo other = (HistoricFormPropertyInfo) obj;
+		HistoricFormPropertyInfoImpl other = (HistoricFormPropertyInfoImpl) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
