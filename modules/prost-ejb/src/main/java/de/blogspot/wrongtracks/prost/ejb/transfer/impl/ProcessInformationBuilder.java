@@ -9,6 +9,7 @@ import org.activiti.engine.history.HistoricTaskInstance;
 
 import de.blogspot.wrongtracks.prost.ejb.transfer.ProcessInformation;
 import de.blogspot.wrongtracks.prost.ejb.transfer.ProcessInformationImpl;
+import de.blogspot.wrongtracks.prost.ejb.transfer.TaskInformation;
 import de.blogspot.wrongtracks.prost.ejb.transfer.TaskInformationImpl;
 
 /**
@@ -28,14 +29,14 @@ public class ProcessInformationBuilder {
 	 * @return Liste mit {@link ProcessInformationImpl} oder leere Liste, fall noch
 	 *         nie ein Prozess gestartet wurde.
 	 */
-	public List<ProcessInformationImpl> buildProcessInformationForAllHistoricProcesses() {
+	public List<ProcessInformation> buildProcessInformationForAllHistoricProcesses() {
 		List<HistoricProcessInstance> allHistoricProcesses = getAllHistoricProcesses();
 
-		List<ProcessInformationImpl> processInfos = new ArrayList<ProcessInformationImpl>(
+		List<ProcessInformation> processInfos = new ArrayList<ProcessInformation>(
 				allHistoricProcesses.size());
 
 		for (HistoricProcessInstance historicInstance : allHistoricProcesses) {
-			ProcessInformationImpl processInfo = createProcessInfo(historicInstance);
+			ProcessInformation processInfo = createProcessInfo(historicInstance);
 
 			createAndAssignTaskInfos(processInfo);
 
@@ -54,9 +55,9 @@ public class ProcessInformationBuilder {
 		List<HistoricTaskInstance> historicTasks = historyService
 				.createHistoricTaskInstanceQuery()
 				.processInstanceId(processInfo.getProcessId()).list();
-		List<TaskInformationImpl> taskInfos = new ArrayList<TaskInformationImpl>();
+		List<TaskInformation> taskInfos = new ArrayList<TaskInformation>();
 		for (HistoricTaskInstance historicTaskInstance : historicTasks) {
-			TaskInformationImpl taskInfo = new TaskInformationImpl();
+			TaskInformation taskInfo = new TaskInformationImpl();
 			taskInfo.setBearbeiter(historicTaskInstance.getAssignee());
 			taskInfo.setId(historicTaskInstance.getId());
 			taskInfo.setName(historicTaskInstance.getName());
@@ -74,9 +75,9 @@ public class ProcessInformationBuilder {
 	 * @param historicInstance
 	 * @return
 	 */
-	private ProcessInformationImpl createProcessInfo(
+	private ProcessInformation createProcessInfo(
 			HistoricProcessInstance historicInstance) {
-		ProcessInformationImpl processInfo = new ProcessInformationImpl();
+		ProcessInformation processInfo = new ProcessInformationImpl();
 		processInfo.setProcessId(historicInstance.getId());
 		processInfo.setStartTime(historicInstance.getStartTime());
 		processInfo.setEndTime(historicInstance.getEndTime());
