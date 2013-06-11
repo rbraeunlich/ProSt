@@ -10,7 +10,7 @@ import java.util.Date;
  * @author Ronny Bräunlich
  * 
  */
-public class HistoricFormPropertyInfoImpl implements Serializable {
+public class HistoricFormPropertyInfoImpl implements Serializable, HistoricFormPropertyInfo {
 
 	private static final long serialVersionUID = -7089132808797477417L;
 	private String id;
@@ -18,26 +18,32 @@ public class HistoricFormPropertyInfoImpl implements Serializable {
 	private String value;
 	private Date time;
 
+	@Override
 	public String getId() {
 		return id;
 	}
 
+	@Override
 	public void setId(String id) {
 		this.id = id;
 	}
 
+	@Override
 	public String getPropertyId() {
 		return propertyId;
 	}
 
+	@Override
 	public void setPropertyId(String propertyId) {
 		this.propertyId = propertyId;
 	}
 
+	@Override
 	public String getValue() {
 		return value;
 	}
 
+	@Override
 	public void setValue(String value) {
 		this.value = value;
 	}
@@ -67,10 +73,12 @@ public class HistoricFormPropertyInfoImpl implements Serializable {
 		return true;
 	}
 
+	@Override
 	public void setTime(Date time) {
 		this.time = time;
 	}
 
+	@Override
 	public Date getTime() {
 		return time;
 	}

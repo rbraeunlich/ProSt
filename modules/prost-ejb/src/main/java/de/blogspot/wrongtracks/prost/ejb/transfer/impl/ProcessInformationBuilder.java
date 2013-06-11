@@ -7,6 +7,7 @@ import org.activiti.engine.HistoryService;
 import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.history.HistoricTaskInstance;
 
+import de.blogspot.wrongtracks.prost.ejb.transfer.ProcessInformation;
 import de.blogspot.wrongtracks.prost.ejb.transfer.ProcessInformationImpl;
 import de.blogspot.wrongtracks.prost.ejb.transfer.TaskInformationImpl;
 
@@ -49,7 +50,7 @@ public class ProcessInformationBuilder {
 	 * 
 	 * @param processInfo
 	 */
-	private void createAndAssignTaskInfos(ProcessInformationImpl processInfo) {
+	private void createAndAssignTaskInfos(ProcessInformation processInfo) {
 		List<HistoricTaskInstance> historicTasks = historyService
 				.createHistoricTaskInstanceQuery()
 				.processInstanceId(processInfo.getProcessId()).list();

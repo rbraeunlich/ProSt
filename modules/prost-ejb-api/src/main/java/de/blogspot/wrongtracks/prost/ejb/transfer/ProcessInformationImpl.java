@@ -11,7 +11,7 @@ import java.util.List;
  * @author Ronny Bräunlich
  * 
  */
-public class ProcessInformationImpl implements Serializable {
+public class ProcessInformationImpl implements Serializable, ProcessInformation {
 
 	private static final long serialVersionUID = -197009301365294430L;
 	private String processId;
@@ -19,34 +19,42 @@ public class ProcessInformationImpl implements Serializable {
 	private Date endTime;
 	private List<TaskInformationImpl> taskInfos = new ArrayList<TaskInformationImpl>();
 
+	@Override
 	public void setProcessId(String id) {
 		this.processId = id;
 	}
 
+	@Override
 	public void setStartTime(Date startTime) {
 		this.startTime = startTime;
 	}
 
+	@Override
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
 	}
 
+	@Override
 	public String getProcessId() {
 		return processId;
 	}
 
+	@Override
 	public Date getStartTime() {
 		return startTime;
 	}
 
+	@Override
 	public Date getEndTime() {
 		return endTime;
 	}
 
+	@Override
 	public List<TaskInformationImpl> getTaskInfos() {
 		return taskInfos;
 	}
 
+	@Override
 	public void setTaskInfos(List<TaskInformationImpl> taskInfos) {
 		this.taskInfos = taskInfos;
 	}
