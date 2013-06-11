@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.ejb.Local;
 import javax.ejb.Stateless;
 
 import org.activiti.bpmn.model.BpmnModel;
@@ -28,10 +27,10 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
 import de.blogspot.wrongtracks.prost.ejb.api.TaskEJBRemote;
-//import de.blogspot.wrongtracks.prost.event.TaskBesitzerGewechseltEvent;
 import de.blogspot.wrongtracks.prost.ejb.exception.TaskException;
 import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyTransfer;
 import de.blogspot.wrongtracks.prost.ejb.transfer.impl.FormPropertyConverter;
+//import de.blogspot.wrongtracks.prost.event.TaskBesitzerGewechseltEvent;
 
 @Stateless(name = "TaskEJB")
 public class TaskEJB implements TaskEJBRemote {

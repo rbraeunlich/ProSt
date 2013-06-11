@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.activiti.engine.HistoryService;
-import org.activiti.engine.history.HistoricDetail;
-import org.activiti.engine.history.HistoricFormProperty;
 import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.history.HistoricTaskInstance;
 
@@ -37,33 +35,12 @@ public class ProcessInformationBuilder {
 
 		for (HistoricProcessInstance historicInstance : allHistoricProcesses) {
 			ProcessInformation processInfo = createProcessInfo(historicInstance);
-			setStudentName(processInfo);
 
 			createAndAssignTaskInfos(processInfo);
 
 			processInfos.add(processInfo);
 		}
 		return processInfos;
-	}
-
-	/**
-	 * Sucht aus den {@link HistoricFormProperty} zum Prozess der
-	 * {@link ProcessInformation} den Namen des Studenten heraus und setzt in an
-	 * der Info.
-	 * 
-	 * @param processInfo
-	 */
-	private void setStudentName(ProcessInformation processInfo) {
-		List<HistoricDetail> list = historyService.createHistoricDetailQuery()
-				.processInstanceId(processInfo.getProcessId()).formProperties()
-				.list();
-		for (HistoricDetail historicDetail : list) {
-			HistoricFormProperty historicFormProperty = (HistoricFormProperty) historicDetail;
-			if (historicFormProperty.getPropertyId().equals("student")) {
-				processInfo.setStudent(historicFormProperty.getPropertyValue());
-			}
-		}
-
 	}
 
 	/**
