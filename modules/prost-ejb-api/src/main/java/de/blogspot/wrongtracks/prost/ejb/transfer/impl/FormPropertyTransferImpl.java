@@ -4,8 +4,9 @@ import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyTransfer;
 
 /**
  * Implementierung von {@link FormPropertyTransfer}.
+ * 
  * @author Ronny Bräunlich
- *
+ * 
  */
 public class FormPropertyTransferImpl implements FormPropertyTransfer {
 
@@ -18,13 +19,14 @@ public class FormPropertyTransferImpl implements FormPropertyTransfer {
 	private boolean required;
 	private boolean writable;
 	/**
-	 * Bei einem Enum stecken hier die möglichen Werte drinne(Set von String) und bei einem Date ein DateTimeFormat mit dem Format.
+	 * Bei einem Enum stecken hier die möglichen Werte drinne(Set von String)
+	 * und bei einem Date ein DateTimeFormat mit dem Format.
 	 */
 	private Object extraFormTypeInformation;
 
 	public FormPropertyTransferImpl(String id, String name, Class<?> type,
-			String value, boolean readable, boolean required,
-			boolean writable, Object extraFormTypeInformation) {
+			String value, boolean readable, boolean required, boolean writable,
+			Object extraFormTypeInformation) {
 		this.id = id;
 		this.name = name;
 		this.type = type;
@@ -43,6 +45,10 @@ public class FormPropertyTransferImpl implements FormPropertyTransfer {
 	@Override
 	public String getName() {
 		return name;
+	}
+
+	public void setType(Class<?> type) {
+		this.type = type;
 	}
 
 	@Override
@@ -70,8 +76,12 @@ public class FormPropertyTransferImpl implements FormPropertyTransfer {
 		return required;
 	}
 
+	public void setExtraFormTypeInformation(Object extraFormTypeInformation) {
+		this.extraFormTypeInformation = extraFormTypeInformation;
+	}
+
 	@Override
-	public Object getExtraFormTypeInformation(){
+	public Object getExtraFormTypeInformation() {
 		return extraFormTypeInformation;
 	}
 
