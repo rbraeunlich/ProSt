@@ -16,8 +16,8 @@ import org.activiti.engine.impl.form.LongFormType;
 import org.activiti.engine.impl.form.StringFormType;
 
 import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyTransfer;
+import de.blogspot.wrongtracks.prost.ejb.transfer.converter.FormPropertyConverter;
 import de.blogspot.wrongtracks.prost.ejb.transfer.impl.FormPropertyTransferImpl;
-import de.blogspot.wrongtracks.prost.ejb.transfer.impl.UrlFormType;
 
 /**
  * Klasse um aus {@link FormProperty} Objekten {@link FormPropertyTransfer}
@@ -27,19 +27,26 @@ import de.blogspot.wrongtracks.prost.ejb.transfer.impl.UrlFormType;
  * 
  */
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class FormPropertyConverter {
+public class FormPropertyConverters {
+
+	private static Map<Class<? extends FormType>, FormPropertyConverter> converters;
 
 	public static FormPropertyTransfer convertProperty(FormProperty formProperty) {
-		String 	id = formProperty.getId(), 
-				name = formProperty.getName(), 
-				value = formProperty.getValue();
-		boolean readable = formProperty.isReadable(), 
-				required = formProperty.isRequired(), 
-				writable = formProperty.isWritable();
-		
+		String id = formProperty.getId(), name = formProperty.getName(), value = formProperty
+				.getValue();
+		boolean readable = formProperty.isReadable(), required = formProperty
+				.isRequired(), writable = formProperty.isWritable();
+
 		FormType formType = formProperty.getType();
 		Class type = null;
 		Object extraFormTypeInformation = null;
+
+		FormPropertyConverter formPropertyConverter = converters.get(formType
+				.getClass());
+		FormPropertyTransfer transfer = formPropertyConverter
+				.convert(formProperty);
+		return transfer;
+
 		if (formType instanceof BooleanFormType) {
 			type = Boolean.class;
 		}
@@ -62,12 +69,21 @@ public class FormPropertyConverter {
 		if (formType instanceof StringFormType) {
 			type = String.class;
 		}
-		if(formType instanceof UrlFormType){
+		if (formType instanceof UrlFormType) {
 			type = URL.class;
 		}
 		return new FormPropertyTransferImpl(id, name, type, value, readable,
 				required, writable, extraFormTypeInformation);
+	}
 
+	public static void addFormPropertyConverter(
+			FormPropertyConverter<? extends FormType> converter) {
+		converters.put(converter.getFormTypeClass(), converter);
+	}
+
+	public static void removeFormPropertyConverter(
+			FormPropertyConverter<? extends FormType> converter) {
+		converters.remove(converter);
 	}
 
 }

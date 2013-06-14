@@ -29,7 +29,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import de.blogspot.wrongtracks.prost.ejb.api.TaskEJBRemote;
 import de.blogspot.wrongtracks.prost.ejb.exception.TaskException;
 import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyTransfer;
-import de.blogspot.wrongtracks.prost.ejb.transfer.converter.impl.FormPropertyConverter;
+import de.blogspot.wrongtracks.prost.ejb.transfer.converter.impl.FormPropertyConverters;
 
 @Stateless(name = "TaskEJB")
 public class TaskEJB implements TaskEJBRemote {
@@ -73,7 +73,7 @@ public class TaskEJB implements TaskEJBRemote {
 		List<FormPropertyTransfer> transferObjects = new ArrayList<FormPropertyTransfer>(
 				formProperties.size());
 		for (FormProperty formProperty : formProperties) {
-			FormPropertyTransfer transfer = FormPropertyConverter
+			FormPropertyTransfer transfer = FormPropertyConverters
 					.convertProperty(formProperty);
 			transferObjects.add(transfer);
 		}

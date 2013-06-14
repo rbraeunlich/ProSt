@@ -17,7 +17,7 @@ import org.activiti.engine.repository.ProcessDefinition;
 import de.blogspot.wrongtracks.prost.ejb.api.ProcessEJBRemote;
 import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyTransfer;
 import de.blogspot.wrongtracks.prost.ejb.transfer.ProcessInformation;
-import de.blogspot.wrongtracks.prost.ejb.transfer.converter.impl.FormPropertyConverter;
+import de.blogspot.wrongtracks.prost.ejb.transfer.converter.impl.FormPropertyConverters;
 import de.blogspot.wrongtracks.prost.ejb.transfer.converter.impl.ProcessInformationBuilder;
 
 /**
@@ -58,7 +58,7 @@ public class ProcessEJB implements ProcessEJBRemote {
 		List<FormPropertyTransfer> transferForms = new ArrayList<FormPropertyTransfer>(
 				formProperties.size());
 		for (FormProperty formProperty : formProperties) {
-			transferForms.add(FormPropertyConverter
+			transferForms.add(FormPropertyConverters
 					.convertProperty(formProperty));
 		}
 		return Collections.unmodifiableList(transferForms);
