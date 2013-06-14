@@ -2,7 +2,8 @@ Manifest-Version: 1.0
 Export-Package: de.blogspot.wrongtracks.prost.ejb.api;version="0.0.1",
  de.blogspot.wrongtracks.prost.ejb.exception;version="0.0.1",
  de.blogspot.wrongtracks.prost.ejb.http;version="0.0.1",
- de.blogspot.wrongtracks.prost.ejb.transfer;version="0.0.1"
+ de.blogspot.wrongtracks.prost.ejb.transfer;version="0.0.1",
+ de.blogspot.wrongtracks.prost.ejb.transfer.impl;version="0.0.1"
 Bundle-Name: ProSt EJB API
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Version: 0.0.1

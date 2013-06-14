@@ -1,4 +1,4 @@
-package de.blogspot.wrongtracks.prost.ejb.transfer.impl;
+package de.blogspot.wrongtracks.prost.ejb.transfer.converter.impl;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -16,7 +16,8 @@ import org.activiti.engine.impl.form.LongFormType;
 import org.activiti.engine.impl.form.StringFormType;
 
 import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyTransfer;
-import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyTransferImpl;
+import de.blogspot.wrongtracks.prost.ejb.transfer.impl.FormPropertyTransferImpl;
+import de.blogspot.wrongtracks.prost.ejb.transfer.impl.UrlFormType;
 
 /**
  * Klasse um aus {@link FormProperty} Objekten {@link FormPropertyTransfer}

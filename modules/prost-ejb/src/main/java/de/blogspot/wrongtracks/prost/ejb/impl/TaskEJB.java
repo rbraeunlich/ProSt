@@ -29,8 +29,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import de.blogspot.wrongtracks.prost.ejb.api.TaskEJBRemote;
 import de.blogspot.wrongtracks.prost.ejb.exception.TaskException;
 import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyTransfer;
-import de.blogspot.wrongtracks.prost.ejb.transfer.impl.FormPropertyConverter;
-//import de.blogspot.wrongtracks.prost.event.TaskBesitzerGewechseltEvent;
+import de.blogspot.wrongtracks.prost.ejb.transfer.converter.impl.FormPropertyConverter;
 
 @Stateless(name = "TaskEJB")
 public class TaskEJB implements TaskEJBRemote {

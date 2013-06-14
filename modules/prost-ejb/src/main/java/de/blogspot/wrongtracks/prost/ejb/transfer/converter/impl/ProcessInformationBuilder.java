@@ -1,4 +1,4 @@
-package de.blogspot.wrongtracks.prost.ejb.transfer.impl;
+package de.blogspot.wrongtracks.prost.ejb.transfer.converter.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,9 +8,9 @@ import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.history.HistoricTaskInstance;
 
 import de.blogspot.wrongtracks.prost.ejb.transfer.ProcessInformation;
-import de.blogspot.wrongtracks.prost.ejb.transfer.ProcessInformationImpl;
 import de.blogspot.wrongtracks.prost.ejb.transfer.TaskInformation;
-import de.blogspot.wrongtracks.prost.ejb.transfer.TaskInformationImpl;
+import de.blogspot.wrongtracks.prost.ejb.transfer.impl.ProcessInformationImpl;
+import de.blogspot.wrongtracks.prost.ejb.transfer.impl.TaskInformationImpl;
 
 /**
  * Klasse, welche Informationen zu Prozessen zusammen sammelt.

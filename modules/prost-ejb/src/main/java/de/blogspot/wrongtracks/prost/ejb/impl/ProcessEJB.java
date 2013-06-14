@@ -17,8 +17,8 @@ import org.activiti.engine.repository.ProcessDefinition;
 import de.blogspot.wrongtracks.prost.ejb.api.ProcessEJBRemote;
 import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyTransfer;
 import de.blogspot.wrongtracks.prost.ejb.transfer.ProcessInformation;
-import de.blogspot.wrongtracks.prost.ejb.transfer.impl.FormPropertyConverter;
-import de.blogspot.wrongtracks.prost.ejb.transfer.impl.ProcessInformationBuilder;
+import de.blogspot.wrongtracks.prost.ejb.transfer.converter.impl.FormPropertyConverter;
+import de.blogspot.wrongtracks.prost.ejb.transfer.converter.impl.ProcessInformationBuilder;
 
 /**
  * Session Bean implementation class ProcessEJB

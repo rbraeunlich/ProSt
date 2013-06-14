@@ -12,7 +12,7 @@ import org.activiti.engine.history.HistoricFormProperty;
 
 import de.blogspot.wrongtracks.prost.ejb.api.HistoryEJBRemote;
 import de.blogspot.wrongtracks.prost.ejb.transfer.HistoricFormPropertyInfo;
-import de.blogspot.wrongtracks.prost.ejb.transfer.HistoricFormPropertyInfoImpl;
+import de.blogspot.wrongtracks.prost.ejb.transfer.impl.HistoricFormPropertyInfoImpl;
 
 @Stateless(name = "HistoryEJB")
 public class HistoryEJB implements HistoryEJBRemote {
