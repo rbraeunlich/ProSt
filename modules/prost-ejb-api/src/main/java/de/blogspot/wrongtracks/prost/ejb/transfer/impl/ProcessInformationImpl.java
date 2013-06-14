@@ -1,9 +1,12 @@
-package de.blogspot.wrongtracks.prost.ejb.transfer;
+package de.blogspot.wrongtracks.prost.ejb.transfer.impl;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import de.blogspot.wrongtracks.prost.ejb.transfer.ProcessInformation;
+import de.blogspot.wrongtracks.prost.ejb.transfer.TaskInformation;
 
 /**
  * Klasse für Informationen über laufende oder abgeschlossene Prozesse.

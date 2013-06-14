@@ -5,7 +5,7 @@ import java.util.List;
 import javax.ejb.Remote;
 
 import de.blogspot.wrongtracks.prost.ejb.transfer.HistoricFormPropertyInfo;
-import de.blogspot.wrongtracks.prost.ejb.transfer.HistoricFormPropertyInfoImpl;
+import de.blogspot.wrongtracks.prost.ejb.transfer.impl.HistoricFormPropertyInfoImpl;
 
 /**
  * Bean zur Abfrage von historischen Daten.

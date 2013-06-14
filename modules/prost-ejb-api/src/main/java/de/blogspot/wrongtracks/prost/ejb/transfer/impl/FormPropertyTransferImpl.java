@@ -1,4 +1,6 @@
-package de.blogspot.wrongtracks.prost.ejb.transfer;
+package de.blogspot.wrongtracks.prost.ejb.transfer.impl;
+
+import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyTransfer;
 
 /**
  * Implementierung von {@link FormPropertyTransfer}.

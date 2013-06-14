@@ -1,7 +1,9 @@
-package de.blogspot.wrongtracks.prost.ejb.transfer;
+package de.blogspot.wrongtracks.prost.ejb.transfer.impl;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import de.blogspot.wrongtracks.prost.ejb.transfer.TaskInformation;
 
 /**
  * Klasse für Informationen über beendete Tasks.
