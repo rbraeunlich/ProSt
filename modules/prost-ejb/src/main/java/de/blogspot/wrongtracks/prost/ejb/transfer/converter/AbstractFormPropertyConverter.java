@@ -1,10 +1,9 @@
-package de.blogspot.wrongtracks.prost.ejb.transfer.impl;
+package de.blogspot.wrongtracks.prost.ejb.transfer.converter;
 
 import org.activiti.engine.form.FormProperty;
-import org.activiti.engine.form.FormType;
 
 import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyTransfer;
-import de.blogspot.wrongtracks.prost.ejb.transfer.converter.FormPropertyConverter;
+import de.blogspot.wrongtracks.prost.ejb.transfer.impl.FormPropertyTransferImpl;
 
 public abstract class AbstractFormPropertyConverter<T extends FormProperty>
 		implements FormPropertyConverter<T> {
