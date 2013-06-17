@@ -47,6 +47,7 @@ public class FormPropertyTransferImpl implements FormPropertyTransfer {
 		return name;
 	}
 
+	@Override
 	public void setType(Class<?> type) {
 		this.type = type;
 	}
@@ -76,6 +77,7 @@ public class FormPropertyTransferImpl implements FormPropertyTransfer {
 		return required;
 	}
 
+	@Override
 	public void setExtraFormTypeInformation(Object extraFormTypeInformation) {
 		this.extraFormTypeInformation = extraFormTypeInformation;
 	}

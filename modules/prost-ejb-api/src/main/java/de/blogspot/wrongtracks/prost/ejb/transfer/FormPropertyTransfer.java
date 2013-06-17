@@ -67,4 +67,8 @@ public interface FormPropertyTransfer extends Serializable {
 	 * @return
 	 */
 	Object getExtraFormTypeInformation();
+
+	void setExtraFormTypeInformation(Object extraFormTypeInformation);
+
+	void setType(Class<?> type);
 }
