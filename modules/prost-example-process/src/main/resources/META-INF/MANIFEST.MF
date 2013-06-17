@@ -4,6 +4,6 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Version: 0.0.1
 Bundle-ManifestVersion: 2
 Import-Package: de.blogspot.wrongtracks.prost.ejb.transfer.converter,
- org.activiti.engine.form;version="[5.12.1,6.0.0)"
+ org.activiti.engine.form;version="[5.12.1,6.0.0)",
 Bundle-SymbolicName: de.blogspot.wrongtracks.prost.prost-example-process
 Bundle-ClassPath: .

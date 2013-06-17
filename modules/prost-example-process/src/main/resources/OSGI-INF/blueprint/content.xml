@@ -1,0 +1,7 @@
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:ext="http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.0.0">
+
+  <bean id="urlFormPropertyConverter" class="de.blogspot.wrongtracks.prost.example.form.UrlFormPropertyConverter" />
+  <service ref="urlFormPropertyConverter" interface="de.blogspot.wrongtracks.prost.ejb.transfer.converter.FormPropertyConverter" />
+	
+</blueprint>

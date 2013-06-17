@@ -14,5 +14,10 @@
 			<artifactId>activiti-engine</artifactId>
 			<version>${activiti-version}</version>
 		</dependency>
+		<dependency>
+			<groupId>de.blogspot.wrongtracks.prost</groupId>
+			<artifactId>prost-ejb</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 </project>

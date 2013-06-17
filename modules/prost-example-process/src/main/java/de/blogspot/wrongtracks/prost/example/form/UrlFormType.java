@@ -1,4 +1,4 @@
-package de.blogspot.wrongtracks.prost.ejb.transfer.impl;
+package de.blogspot.wrongtracks.prost.example.form;
 
 import java.net.MalformedURLException;
 import java.net.URL;
