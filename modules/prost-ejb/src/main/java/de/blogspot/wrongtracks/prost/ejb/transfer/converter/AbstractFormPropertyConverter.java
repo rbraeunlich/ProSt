@@ -1,15 +1,16 @@
 package de.blogspot.wrongtracks.prost.ejb.transfer.converter;
 
 import org.activiti.engine.form.FormProperty;
+import org.activiti.engine.form.FormType;
 
 import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyTransfer;
 import de.blogspot.wrongtracks.prost.ejb.transfer.impl.FormPropertyTransferImpl;
 
-public abstract class AbstractFormPropertyConverter<T extends FormProperty>
+public abstract class AbstractFormPropertyConverter<T extends FormType>
 		implements FormPropertyConverter<T> {
 
 	@Override
-	public FormPropertyTransfer convert(T formProperty) {
+	public FormPropertyTransfer convert(FormProperty formProperty) {
 		// @formatter:off
 		String  id = formProperty.getId(), 
 				name = formProperty.getName(), 
@@ -18,12 +19,12 @@ public abstract class AbstractFormPropertyConverter<T extends FormProperty>
 				required = formProperty.isRequired(), 
 				writable = formProperty.isWritable();
 		// @formatter:on
-		FormPropertyTransferImpl formPropertyTransfer = new FormPropertyTransferImpl(
+		FormPropertyTransfer formPropertyTransfer = new FormPropertyTransferImpl(
 				id, name, null, value, readable, required, writable, null);
 		doConvert(formProperty, formPropertyTransfer);
 		return formPropertyTransfer;
 	}
 
-	protected abstract FormPropertyTransfer doConvert(T formProperty,
+	protected abstract void doConvert(FormProperty formProperty,
 			FormPropertyTransfer formPropertyTransfer);
 }

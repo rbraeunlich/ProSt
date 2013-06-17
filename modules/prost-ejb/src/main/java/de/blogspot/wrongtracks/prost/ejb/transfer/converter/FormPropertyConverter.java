@@ -5,9 +5,9 @@ import org.activiti.engine.form.FormType;
 
 import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyTransfer;
 
-public interface FormPropertyConverter<T extends FormProperty> {
+public interface FormPropertyConverter<T extends FormType> {
 
-	public FormPropertyTransfer convert(T formProperty);
+	public FormPropertyTransfer convert(FormProperty formProperty);
 	
-	public Class<? extends FormType> getFormTypeClass();
+	public Class<T> getFormTypeClass();
 }
