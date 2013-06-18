@@ -50,7 +50,7 @@
 	<service ref="taskService" interface="org.activiti.engine.TaskService" />
 	<service ref="historyService" interface="org.activiti.engine.HistoryService" />
 	<service ref="identityService" interface="org.activiti.engine.IdentityService" />
-	<service ref="ManagementService" interface="org.activiti.engine.ManagementService" />
+	<service ref="managementService" interface="org.activiti.engine.ManagementService" />
 	<!-- ############ End Activiti services ############ -->
 
 	<reference-list id="activityProviders" availability="optional"
