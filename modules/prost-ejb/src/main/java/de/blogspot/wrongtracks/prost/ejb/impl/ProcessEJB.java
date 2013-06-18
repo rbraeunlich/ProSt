@@ -25,7 +25,7 @@ import de.blogspot.wrongtracks.prost.ejb.transfer.converter.impl.ProcessInformat
  */
 @Stateless(name = "ProcessEJB")
 public class ProcessEJB implements ProcessEJBRemote {
-
+	
 	private RepositoryService repositoryService;
 
 	private FormService formService;
@@ -52,6 +52,7 @@ public class ProcessEJB implements ProcessEJBRemote {
 		return Collections.unmodifiableMap(result);
 	}
 
+	@Override
 	public List<FormPropertyTransfer> getStartFormProperties(String processId) {
 		List<FormProperty> formProperties = formService.getStartFormData(
 				processId).getFormProperties();
