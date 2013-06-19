@@ -35,7 +35,7 @@
 	<bean id="formPropertyConverters"
 		class="de.blogspot.wrongtracks.prost.ejb.transfer.converter.impl.FormPropertyConverters" />
 
-	<reference-list id="formPropertyConverters"
+	<reference-list id="formPropertyConverterRefList"
 		availability="optional"
 		interface="de.blogspot.wrongtracks.prost.ejb.transfer.converter.FormPropertyConverter"
 		activation="eager">
