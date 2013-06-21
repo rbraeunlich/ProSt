@@ -15,7 +15,7 @@ Import-Package: de.blogspot.wrongtracks.prost.ejb.api,
  org.activiti.engine.repository;version="[5.12.1,6.0.0)",
  org.activiti.engine.impl.form;version="[5.12.1,6.0.0)",
  org.osgi.framework,
- org.osgi.enterprise,
+ org.osgi.util.tracker,
 Bundle-SymbolicName: de.blogspot.wrongtracks.prost.prost-ejb
 Bundle-ClassPath: .
 Export-Package: de.blogspot.wrongtracks.prost.ejb.transfer.converter;version="0.0.1"
