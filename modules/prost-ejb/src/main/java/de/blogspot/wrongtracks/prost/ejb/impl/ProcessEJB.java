@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
 import javax.ejb.Stateless;
 
 import org.activiti.engine.FormService;
@@ -13,6 +16,8 @@ import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.form.FormProperty;
 import org.activiti.engine.repository.ProcessDefinition;
+import org.osgi.framework.BundleContext;
+import org.osgi.util.tracker.ServiceTracker;
 
 import de.blogspot.wrongtracks.prost.ejb.api.ProcessEJBRemote;
 import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyTransfer;
@@ -25,14 +30,17 @@ import de.blogspot.wrongtracks.prost.ejb.transfer.converter.impl.ProcessInformat
  */
 @Stateless(name = "ProcessEJB")
 public class ProcessEJB implements ProcessEJBRemote {
-	
-	private RepositoryService repositoryService;
 
-	private FormService formService;
+	private ServiceTracker repositoryServiceTracker;
 
-	private RuntimeService runtimeService;
+	private ServiceTracker formServiceTracker;
 
-	private ProcessInformationBuilder processInfoBuilder;
+	private ServiceTracker runtimeServiceTracker;
+
+	private ProcessInformationBuilder processInfoBuilder = new ProcessInformationBuilder();
+
+	@Resource
+	private BundleContext context;
 
 	/**
 	 * Default constructor.
@@ -40,10 +48,30 @@ public class ProcessEJB implements ProcessEJBRemote {
 	public ProcessEJB() {
 	}
 
+	@PostConstruct
+	public void init() {
+		// @formatter:off
+		repositoryServiceTracker = new ServiceTracker(context, RepositoryService.class.getName(), null);
+		repositoryServiceTracker.open();
+		formServiceTracker = new ServiceTracker(context, FormService.class.getName(), null);
+		formServiceTracker.open();
+		runtimeServiceTracker = new ServiceTracker(context, RuntimeService.class.getName(), null);
+		runtimeServiceTracker.open();
+		//@formatter:on
+	}
+
+	@PreDestroy
+	public void destroy() {
+		repositoryServiceTracker.close();
+		formServiceTracker.close();
+		runtimeServiceTracker.close();
+	}
+
 	@Override
 	public Map<String, String> getDeployedProcesses() {
-		List<ProcessDefinition> processDefinitions = repositoryService
-				.createProcessDefinitionQuery().latestVersion().list();
+		List<ProcessDefinition> processDefinitions = ((RepositoryService) repositoryServiceTracker
+				.getService()).createProcessDefinitionQuery().latestVersion()
+				.list();
 		Map<String, String> result = new HashMap<String, String>(
 				processDefinitions.size());
 		for (ProcessDefinition definition : processDefinitions) {
@@ -54,8 +82,8 @@ public class ProcessEJB implements ProcessEJBRemote {
 
 	@Override
 	public List<FormPropertyTransfer> getStartFormProperties(String processId) {
-		List<FormProperty> formProperties = formService.getStartFormData(
-				processId).getFormProperties();
+		List<FormProperty> formProperties = ((FormService) formServiceTracker
+				.getService()).getStartFormData(processId).getFormProperties();
 		List<FormPropertyTransfer> transferForms = new ArrayList<FormPropertyTransfer>(
 				formProperties.size());
 		for (FormProperty formProperty : formProperties) {
@@ -69,9 +97,11 @@ public class ProcessEJB implements ProcessEJBRemote {
 	public void startProcessById(String processId,
 			Map<String, String> processVariables) {
 		if (processVariables == null || processVariables.isEmpty()) {
-			runtimeService.startProcessInstanceById(processId);
+			((RuntimeService) runtimeServiceTracker.getService())
+					.startProcessInstanceById(processId);
 		} else {
-			formService.submitStartFormData(processId, processVariables);
+			((FormService) formServiceTracker.getService())
+					.submitStartFormData(processId, processVariables);
 		}
 	}
 
@@ -79,18 +109,6 @@ public class ProcessEJB implements ProcessEJBRemote {
 	public List<ProcessInformation> getProcessInformationForAllProcesses() {
 		return Collections.unmodifiableList(processInfoBuilder
 				.buildProcessInformationForAllHistoricProcesses());
-	}
-
-	public void setRuntimeService(RuntimeService runtimeService) {
-		this.runtimeService = runtimeService;
-	}
-
-	public void setFormService(FormService formService) {
-		this.formService = formService;
-	}
-
-	public void setRepositoryService(RepositoryService repositoryService) {
-		this.repositoryService = repositoryService;
 	}
 
 }

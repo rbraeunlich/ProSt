@@ -1,36 +1,5 @@
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
 	xmlns:ext="http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.0.0">
-
-	<!-- ############ Start EJB initialization ############ -->
-	<bean id="historyEJB" class="de.blogspot.wrongtracks.prost.ejb.impl.HistoryEJB">
-		<property name="historyService" ref="historyServiceRef" />
-	</bean>
-
-	<bean id="processEJB" class="de.blogspot.wrongtracks.prost.ejb.impl.ProcessEJB">
-		<property name="runtimeService" ref="runtimeServiceRef" />
-		<property name="formService" ref="formServiceRef" />
-		<property name="repositoryService" ref="repositoryServiceRef" />
-	</bean>
-
-	<bean id="taskEJB" class="de.blogspot.wrongtracks.prost.ejb.impl.TaskEJB">
-		<property name="formService" ref="formServiceRef" />
-		<property name="repositoryService" ref="repositoryServiceRef" />
-		<property name="runtimeService" ref="runtimeServiceRef" />
-		<property name="taskService" ref="taskServiceRef" />
-	</bean>
-
-	<bean id="processInformationBuilder"
-		class="de.blogspot.wrongtracks.prost.ejb.transfer.converter.impl.ProcessInformationBuilder">
-		<property name="historyService" ref="historyServiceRef" />
-	</bean>
-
-	<reference id="historyServiceRef" interface="org.activiti.engine.HistoryService" />
-	<reference id="runtimeServiceRef" interface="org.activiti.engine.RuntimeService" />
-	<reference id="formServiceRef" interface="org.activiti.engine.FormService" />
-	<reference id="repositoryServiceRef" interface="org.activiti.engine.RepositoryService" />
-	<reference id="taskServiceRef" interface="org.activiti.engine.TaskService" />
-
-	<!-- ############ End EJB initialization ############ -->
 	<!-- ############ Start converter registration ############ -->
 	<bean id="formPropertyConverters"
 		class="de.blogspot.wrongtracks.prost.ejb.transfer.converter.impl.FormPropertyConverters" />
