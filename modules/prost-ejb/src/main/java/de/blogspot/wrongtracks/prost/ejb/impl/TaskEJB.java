@@ -11,6 +11,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
 import javax.ejb.Stateless;
 
 import org.activiti.bpmn.model.BpmnModel;
@@ -27,8 +29,11 @@ import org.activiti.engine.task.IdentityLinkType;
 import org.activiti.engine.task.Task;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+import org.osgi.framework.BundleContext;
+import org.osgi.util.tracker.ServiceTracker;
 
 import de.blogspot.wrongtracks.prost.ejb.api.TaskEJBRemote;
+import de.blogspot.wrongtracks.prost.ejb.exception.ServiceUnavailableException;
 import de.blogspot.wrongtracks.prost.ejb.exception.TaskException;
 import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyTransfer;
 import de.blogspot.wrongtracks.prost.ejb.transfer.converter.impl.FormPropertyConverters;
@@ -36,11 +41,13 @@ import de.blogspot.wrongtracks.prost.ejb.transfer.converter.impl.FormPropertyCon
 @Stateless(name = "TaskEJB")
 public class TaskEJB implements TaskEJBRemote {
 
-	private TaskService taskService;
-	private FormService formService;
-	private RuntimeService runtimeService;
-	private RepositoryService repositoryService;
+	@Resource
+	private BundleContext context;
 	private final Properties props = new Properties();
+	private ServiceTracker taskServiceTracker;
+	private ServiceTracker formServiceTracker;
+	private ServiceTracker runtimeServiceTracker;
+	private ServiceTracker repositoryServiceTracker;
 	private static final String TASK_UNAVAILABLE_PROP_KEY = "taskUnavailable";
 
 	// @Inject
@@ -49,6 +56,18 @@ public class TaskEJB implements TaskEJBRemote {
 
 	@PostConstruct
 	public void init() {
+		taskServiceTracker = new ServiceTracker(context,
+				TaskService.class.getName(), null);
+		taskServiceTracker.open();
+		formServiceTracker = new ServiceTracker(context,
+				FormService.class.getName(), null);
+		formServiceTracker.open();
+		runtimeServiceTracker = new ServiceTracker(context,
+				RuntimeService.class.getName(), null);
+		runtimeServiceTracker.open();
+		repositoryServiceTracker = new ServiceTracker(context,
+				RepositoryService.class.getName(), null);
+		repositoryServiceTracker.open();
 		try {
 			props.load(this.getClass().getResourceAsStream(
 					"error-msg.properties"));
@@ -57,13 +76,21 @@ public class TaskEJB implements TaskEJBRemote {
 		}
 	}
 
+	@PreDestroy
+	public void destroy() {
+		taskServiceTracker.close();
+		formServiceTracker.close();
+		runtimeServiceTracker.close();
+		repositoryServiceTracker.close();
+	}
+
 	/**
 	 * @return Map<taskId, taskName>
 	 */
 	@Override
 	public Map<String, String> getTasksForUser(String user) {
-		List<Task> tasks = taskService.createTaskQuery().taskAssignee(user)
-				.list();
+		List<Task> tasks = getService(TaskService.class, taskServiceTracker)
+				.createTaskQuery().taskAssignee(user).list();
 		Map<String, String> result = new HashMap<String, String>(tasks.size());
 		for (Task task : tasks) {
 			result.put(task.getId(), task.getName());
@@ -75,15 +102,16 @@ public class TaskEJB implements TaskEJBRemote {
 	public List<FormPropertyTransfer> startTask(String taskId, String user)
 			throws TaskException {
 		try {
-			taskService.claim(taskId, user);
+			getService(TaskService.class, taskServiceTracker).claim(taskId,
+					user);
 			// taskBesitzerGewechseltEvent.fire(new
 			// TaskBesitzerGewechseltEvent());
 		} catch (ActivitiException ae) {
 			pruefeObGrundTaskWegIstUndWerfeTaskException(ae);
 			throw ae;
 		}
-		List<FormProperty> formProperties = formService.getTaskFormData(taskId)
-				.getFormProperties();
+		List<FormProperty> formProperties = getService(FormService.class,
+				formServiceTracker).getTaskFormData(taskId).getFormProperties();
 		List<FormPropertyTransfer> transferObjects = new ArrayList<FormPropertyTransfer>(
 				formProperties.size());
 		for (FormProperty formProperty : formProperties) {
@@ -100,11 +128,14 @@ public class TaskEJB implements TaskEJBRemote {
 		// if someone took the task there won't be an assignee in history
 		// that's why it is claimed here again
 		try {
-			taskService.claim(taskId, userId);
+			getService(TaskService.class, taskServiceTracker).claim(taskId,
+					userId);
 			if (formValues == null || formValues.isEmpty()) {
-				taskService.complete(taskId);
+				getService(TaskService.class, taskServiceTracker).complete(
+						taskId);
 			} else {
-				formService.submitTaskFormData(taskId, formValues);
+				getService(FormService.class, formServiceTracker)
+						.submitTaskFormData(taskId, formValues);
 			}
 		} catch (ActivitiException ae) {
 			pruefeObGrundTaskWegIstUndWerfeTaskException(ae);
@@ -114,20 +145,23 @@ public class TaskEJB implements TaskEJBRemote {
 
 	@Override
 	public byte[] getProcessImage(String taskId) {
-		String processInstanceId = taskService.createTaskQuery().taskId(taskId)
+		String processInstanceId = getService(TaskService.class,
+				taskServiceTracker).createTaskQuery().taskId(taskId)
 				.singleResult().getProcessInstanceId();
 
-		ProcessInstance processInstance = runtimeService
-				.createProcessInstanceQuery()
+		ProcessInstance processInstance = getService(RuntimeService.class,
+				runtimeServiceTracker).createProcessInstanceQuery()
 				.processInstanceId(processInstanceId).singleResult();
 
-		BpmnModel model = repositoryService.getBpmnModel(processInstance
-				.getProcessDefinitionId());
+		BpmnModel model = getService(RepositoryService.class,
+				repositoryServiceTracker).getBpmnModel(
+				processInstance.getProcessDefinitionId());
 
 		InputStream definitionImageStream = null;
 		if (model != null) {
 			definitionImageStream = ProcessDiagramGenerator.generateDiagram(
-					model, "png", runtimeService
+					model, "png",
+					getService(RuntimeService.class, runtimeServiceTracker)
 							.getActiveActivityIds(processInstance.getId()));
 		}
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -153,11 +187,13 @@ public class TaskEJB implements TaskEJBRemote {
 
 	@Override
 	public Map<String, Pair<String, String>> getAllTasksForGroup(String group) {
-		List<Task> tasks = taskService.createTaskQuery().active().list();
+		List<Task> tasks = getService(TaskService.class, taskServiceTracker)
+				.createTaskQuery().active().list();
 		Map<String, Pair<String, String>> result = new HashMap<String, Pair<String, String>>(
 				tasks.size());
 		for (Task task : tasks) {
-			List<IdentityLink> identityLinksForTask = taskService
+			List<IdentityLink> identityLinksForTask = getService(
+					TaskService.class, taskServiceTracker)
 					.getIdentityLinksForTask(task.getId());
 			for (IdentityLink link : identityLinksForTask) {
 				if (link.getType().equals(IdentityLinkType.CANDIDATE)
@@ -176,7 +212,8 @@ public class TaskEJB implements TaskEJBRemote {
 	@Override
 	public void dispossessTask(String taskId) throws TaskException {
 		try {
-			taskService.claim(taskId, null);
+			getService(TaskService.class, taskServiceTracker).claim(taskId,
+					null);
 		} catch (ActivitiException ae) {
 			pruefeObGrundTaskWegIstUndWerfeTaskException(ae);
 			throw ae;
@@ -199,7 +236,8 @@ public class TaskEJB implements TaskEJBRemote {
 	@Override
 	public Map<String, Object> getVariables(String taskId) throws TaskException {
 		try {
-			return taskService.getVariables(taskId);
+			return getService(TaskService.class, taskServiceTracker)
+					.getVariables(taskId);
 		} catch (ActivitiException ae) {
 			if (ae.getMessage().contains("doesn't exist")) {
 				throw new TaskException(
@@ -209,20 +247,12 @@ public class TaskEJB implements TaskEJBRemote {
 		return null;
 	}
 
-	public void setTaskService(TaskService taskService) {
-		this.taskService = taskService;
+	@SuppressWarnings("unchecked")
+	private <T> T getService(Class<T> clazz, ServiceTracker tracker) {
+		Object service = tracker.getService();
+		if (service == null) {
+			throw new ServiceUnavailableException();
+		}
+		return (T) service;
 	}
-
-	public void setFormService(FormService formService) {
-		this.formService = formService;
-	}
-
-	public void setRuntimeService(RuntimeService runtimeService) {
-		this.runtimeService = runtimeService;
-	}
-
-	public void setRepositoryService(RepositoryService repositoryService) {
-		this.repositoryService = repositoryService;
-	}
-
 }

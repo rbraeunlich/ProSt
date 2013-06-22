@@ -20,6 +20,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
 
 import de.blogspot.wrongtracks.prost.ejb.api.ProcessEJBRemote;
+import de.blogspot.wrongtracks.prost.ejb.exception.ServiceUnavailableException;
 import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyTransfer;
 import de.blogspot.wrongtracks.prost.ejb.transfer.ProcessInformation;
 import de.blogspot.wrongtracks.prost.ejb.transfer.converter.impl.FormPropertyConverters;
@@ -37,8 +38,6 @@ public class ProcessEJB implements ProcessEJBRemote {
 
 	private ServiceTracker runtimeServiceTracker;
 
-	private ProcessInformationBuilder processInfoBuilder = new ProcessInformationBuilder();
-
 	@Resource
 	private BundleContext context;
 
@@ -50,14 +49,15 @@ public class ProcessEJB implements ProcessEJBRemote {
 
 	@PostConstruct
 	public void init() {
-		// @formatter:off
-		repositoryServiceTracker = new ServiceTracker(context, RepositoryService.class.getName(), null);
+		repositoryServiceTracker = new ServiceTracker(context,
+				RepositoryService.class.getName(), null);
 		repositoryServiceTracker.open();
-		formServiceTracker = new ServiceTracker(context, FormService.class.getName(), null);
+		formServiceTracker = new ServiceTracker(context,
+				FormService.class.getName(), null);
 		formServiceTracker.open();
-		runtimeServiceTracker = new ServiceTracker(context, RuntimeService.class.getName(), null);
+		runtimeServiceTracker = new ServiceTracker(context,
+				RuntimeService.class.getName(), null);
 		runtimeServiceTracker.open();
-		//@formatter:on
 	}
 
 	@PreDestroy
@@ -69,9 +69,9 @@ public class ProcessEJB implements ProcessEJBRemote {
 
 	@Override
 	public Map<String, String> getDeployedProcesses() {
-		List<ProcessDefinition> processDefinitions = ((RepositoryService) repositoryServiceTracker
-				.getService()).createProcessDefinitionQuery().latestVersion()
-				.list();
+		List<ProcessDefinition> processDefinitions = getService(
+				RepositoryService.class, repositoryServiceTracker)
+				.createProcessDefinitionQuery().latestVersion().list();
 		Map<String, String> result = new HashMap<String, String>(
 				processDefinitions.size());
 		for (ProcessDefinition definition : processDefinitions) {
@@ -82,8 +82,9 @@ public class ProcessEJB implements ProcessEJBRemote {
 
 	@Override
 	public List<FormPropertyTransfer> getStartFormProperties(String processId) {
-		List<FormProperty> formProperties = ((FormService) formServiceTracker
-				.getService()).getStartFormData(processId).getFormProperties();
+		List<FormProperty> formProperties = getService(FormService.class,
+				formServiceTracker).getStartFormData(processId)
+				.getFormProperties();
 		List<FormPropertyTransfer> transferForms = new ArrayList<FormPropertyTransfer>(
 				formProperties.size());
 		for (FormProperty formProperty : formProperties) {
@@ -97,18 +98,27 @@ public class ProcessEJB implements ProcessEJBRemote {
 	public void startProcessById(String processId,
 			Map<String, String> processVariables) {
 		if (processVariables == null || processVariables.isEmpty()) {
-			((RuntimeService) runtimeServiceTracker.getService())
+			getService(RuntimeService.class, runtimeServiceTracker)
 					.startProcessInstanceById(processId);
 		} else {
-			((FormService) formServiceTracker.getService())
+			getService(FormService.class, formServiceTracker)
 					.submitStartFormData(processId, processVariables);
 		}
 	}
 
 	@Override
 	public List<ProcessInformation> getProcessInformationForAllProcesses() {
-		return Collections.unmodifiableList(processInfoBuilder
+		return Collections.unmodifiableList(new ProcessInformationBuilder()
 				.buildProcessInformationForAllHistoricProcesses());
+	}
+
+	@SuppressWarnings("unchecked")
+	private <T> T getService(Class<T> clazz, ServiceTracker tracker) {
+		Object service = tracker.getService();
+		if (service == null) {
+			throw new ServiceUnavailableException();
+		}
+		return (T) service;
 	}
 
 }
