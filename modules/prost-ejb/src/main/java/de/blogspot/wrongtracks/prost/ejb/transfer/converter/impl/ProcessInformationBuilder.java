@@ -13,7 +13,7 @@ import de.blogspot.wrongtracks.prost.ejb.transfer.impl.ProcessInformationImpl;
 import de.blogspot.wrongtracks.prost.ejb.transfer.impl.TaskInformationImpl;
 
 /**
- * Klasse, welche Informationen zu Prozessen zusammen sammelt.
+ * Clazz, to gather process information
  * 
  * @author Ronny Bräunlich
  * 
@@ -23,11 +23,10 @@ public class ProcessInformationBuilder {
 	private HistoryService historyService;
 
 	/**
-	 * Erzeugt {@link ProcessInformationImpl} für alle Prozesse, welche in der
-	 * Prozessengine laufen oder irgendwann mal liefen.
+	 * Create {@link ProcessInformation} for all processes, that exist or ever
+	 * existed in the database
 	 * 
-	 * @return Liste mit {@link ProcessInformationImpl} oder leere Liste, fall noch
-	 *         nie ein Prozess gestartet wurde.
+	 * @return list containing {@link ProcessInformation} or empty list
 	 */
 	public List<ProcessInformation> buildProcessInformationForAllHistoricProcesses() {
 		List<HistoricProcessInstance> allHistoricProcesses = getAllHistoricProcesses();
@@ -46,8 +45,8 @@ public class ProcessInformationBuilder {
 	}
 
 	/**
-	 * Erzeugt {@link TaskInformationImpl} Objekte zum Prozess der info und setzt
-	 * diese an der {@link ProcessInformationImpl}.
+	 * 
+	 * Creates {@link TaskInformationImpl} objects for the process of the "info" and adds them
 	 * 
 	 * @param processInfo
 	 */
@@ -68,13 +67,6 @@ public class ProcessInformationBuilder {
 		processInfo.setTaskInfos(taskInfos);
 	}
 
-	/**
-	 * Erzeugt eine {@link ProcessInformationImpl} für die übergebene
-	 * {@link HistoricProcessInstance}.
-	 * 
-	 * @param historicInstance
-	 * @return
-	 */
 	private ProcessInformation createProcessInfo(
 			HistoricProcessInstance historicInstance) {
 		ProcessInformation processInfo = new ProcessInformationImpl();

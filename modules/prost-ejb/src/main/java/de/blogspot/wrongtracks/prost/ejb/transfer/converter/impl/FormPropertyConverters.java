@@ -10,22 +10,21 @@ import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyTransfer;
 import de.blogspot.wrongtracks.prost.ejb.transfer.converter.FormPropertyConverter;
 
 /**
- * Klasse um aus {@link FormProperty} Objekten {@link FormPropertyTransfer}
- * Objekte zu erzeugen.
+ * Clazz take convert {@link FormProperty} objects to
+ * {@link FormPropertyTransfer} objects
  * 
  * @author Ronny Bräunlich
  * 
  */
 public class FormPropertyConverters {
 
-	private static Map<Class<? extends FormType>, FormPropertyConverter<?>> converters
-	= new HashMap<Class<? extends FormType>, FormPropertyConverter<?>>();
+	private static Map<Class<? extends FormType>, FormPropertyConverter<?>> converters = new HashMap<Class<? extends FormType>, FormPropertyConverter<?>>();
 
 	public static FormPropertyTransfer convertProperty(FormProperty formProperty) {
 
 		FormType formType = formProperty.getType();
-		FormPropertyConverter<?> formPropertyConverter = converters.get(formType
-				.getClass());
+		FormPropertyConverter<?> formPropertyConverter = converters
+				.get(formType.getClass());
 		FormPropertyTransfer transfer = formPropertyConverter
 				.convert(formProperty);
 		return transfer;

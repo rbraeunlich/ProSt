@@ -8,7 +8,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 
 import org.activiti.bpmn.model.BpmnModel;
@@ -38,10 +40,22 @@ public class TaskEJB implements TaskEJBRemote {
 	private FormService formService;
 	private RuntimeService runtimeService;
 	private RepositoryService repositoryService;
+	private final Properties props = new Properties();
+	private static final String TASK_UNAVAILABLE_PROP_KEY = "taskUnavailable";
 
 	// @Inject
 	// FIXME eventing!
 	// private Event<TaskBesitzerGewechseltEvent> taskBesitzerGewechseltEvent;
+
+	@PostConstruct
+	public void init() {
+		try {
+			props.load(this.getClass().getResourceAsStream(
+					"error-msg.properties"));
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 	/**
 	 * @return Map<taskId, taskName>
@@ -83,8 +97,8 @@ public class TaskEJB implements TaskEJBRemote {
 	@Override
 	public void endTask(String taskId, String userId,
 			Map<String, String> formValues) throws TaskException {
-		// falls die Task im letzten Moment entzogen wurde, steht kein Assignee
-		// in der History darum wird die Task hier nochmal geholt
+		// if someone took the task there won't be an assignee in history
+		// that's why it is claimed here again
 		try {
 			taskService.claim(taskId, userId);
 			if (formValues == null || formValues.isEmpty()) {
@@ -168,9 +182,8 @@ public class TaskEJB implements TaskEJBRemote {
 			throw ae;
 		}
 		/*
-		 * für Activiti ist das umsetzen des Bearbeiters einer Task (hier auf
-		 * null) kein Event. Darum muss ich mein eigenes Event benutzen um die
-		 * GUI zum Updaten zu bewegen
+		 * Changing the assignee is not (yet) an event for Activiti That's why I
+		 * have to my own to make clients update the GUI
 		 */
 		// taskBesitzerGewechseltEvent.fire(new TaskBesitzerGewechseltEvent());
 	}
@@ -178,7 +191,8 @@ public class TaskEJB implements TaskEJBRemote {
 	private void pruefeObGrundTaskWegIstUndWerfeTaskException(
 			ActivitiException ae) throws TaskException {
 		if (ae.getMessage().contains("Cannot find task")) {
-			throw new TaskException("Ooops, die Task ist nicht mehr verfügbar.");
+			throw new TaskException(
+					props.getProperty(TASK_UNAVAILABLE_PROP_KEY));
 		}
 	}
 
@@ -189,7 +203,7 @@ public class TaskEJB implements TaskEJBRemote {
 		} catch (ActivitiException ae) {
 			if (ae.getMessage().contains("doesn't exist")) {
 				throw new TaskException(
-						"Ooops, die Task ist nicht mehr verfügbar.");
+						props.getProperty(TASK_UNAVAILABLE_PROP_KEY));
 			}
 		}
 		return null;
