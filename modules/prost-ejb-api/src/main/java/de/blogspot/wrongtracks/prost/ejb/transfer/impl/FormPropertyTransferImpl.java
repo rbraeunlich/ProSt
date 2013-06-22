@@ -1,10 +1,10 @@
 package de.blogspot.wrongtracks.prost.ejb.transfer.impl;
 
+import java.text.DateFormat;
+
 import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyTransfer;
 
 /**
- * Implementierung von {@link FormPropertyTransfer}.
- * 
  * @author Ronny Bräunlich
  * 
  */
@@ -19,8 +19,8 @@ public class FormPropertyTransferImpl implements FormPropertyTransfer {
 	private boolean required;
 	private boolean writable;
 	/**
-	 * Bei einem Enum stecken hier die möglichen Werte drinne(Set von String)
-	 * und bei einem Date ein DateTimeFormat mit dem Format.
+	 * Field to store extra values. For enum-formproperties it'll be a set of
+	 * string and for date-formproperties a {@link DateFormat}
 	 */
 	private Object extraFormTypeInformation;
 

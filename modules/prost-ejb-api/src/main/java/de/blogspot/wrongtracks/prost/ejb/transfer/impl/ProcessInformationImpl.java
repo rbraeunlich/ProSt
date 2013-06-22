@@ -9,7 +9,7 @@ import de.blogspot.wrongtracks.prost.ejb.transfer.ProcessInformation;
 import de.blogspot.wrongtracks.prost.ejb.transfer.TaskInformation;
 
 /**
- * Klasse für Informationen über laufende oder abgeschlossene Prozesse.
+ * Clazz for infomration about running and finished processes
  * 
  * @author Ronny Bräunlich
  * 

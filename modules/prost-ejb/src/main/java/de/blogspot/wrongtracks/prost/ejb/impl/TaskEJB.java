@@ -174,7 +174,7 @@ public class TaskEJB implements TaskEJBRemote {
 	}
 
 	@Override
-	public void entzieheTask(String taskId) throws TaskException {
+	public void dispossessTask(String taskId) throws TaskException {
 		try {
 			taskService.claim(taskId, null);
 		} catch (ActivitiException ae) {

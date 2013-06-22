@@ -5,10 +5,9 @@ import java.util.List;
 import javax.ejb.Remote;
 
 import de.blogspot.wrongtracks.prost.ejb.transfer.HistoricFormPropertyInfo;
-import de.blogspot.wrongtracks.prost.ejb.transfer.impl.HistoricFormPropertyInfoImpl;
 
 /**
- * Bean zur Abfrage von historischen Daten.
+ * Bean for historical data.
  * 
  * @author Ronny Bräunlich
  * 
@@ -17,14 +16,18 @@ import de.blogspot.wrongtracks.prost.ejb.transfer.impl.HistoricFormPropertyInfoI
 public interface HistoryEJBRemote {
 
 	/**
-	 * Liefert zur übergebenene Task ID sämtliche FormProperty-Daten. Die Liste
-	 * beinhaltet die aktuell gültigen Daten, sowie alte, überschriebene.
+	 * Get's all formProperty data. The list contains current values and old
+	 * ones.
 	 * 
-	 * @param taskId
-	 * @return Liste von {@link HistoricFormPropertyInfoImpl}
 	 */
-	List<HistoricFormPropertyInfo> getHistoricFormPropertyDataForProcess(String processId);
+	List<HistoricFormPropertyInfo> getHistoricFormPropertyDataForProcess(
+			String processId);
 
+	/**
+	 * Get's all formProperty data. The list contains current values and old
+	 * ones.
+	 * 
+	 */
 	List<HistoricFormPropertyInfo> getHistoricFormPropertyDataForTask(
 			String taskId);
 

@@ -11,7 +11,7 @@ import de.blogspot.wrongtracks.prost.ejb.exception.TaskException;
 import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyTransfer;
 
 /**
- * Bean für die Bearbeitung von Tasks.
+ * Bean to work with tasks.
  * 
  * @author Ronny Bräunlich
  * 
@@ -22,20 +22,18 @@ public interface TaskEJBRemote {
 	Map<String, String> getTasksForUser(String user);
 
 	/**
-	 * Startet die Task mit der übergebenen ID und setzt den user als assignee.
-	 * Die Task ist danach nicht mehr der Gruppen zugeordnet, sondern nur noch
-	 * dem user.
+	 * Starts the task and sets the user as assignee. The task doesn't belong to
+	 * the group anymore afterwards
 	 * 
 	 * @param taskId
 	 * @param user
-	 * @return Liste der für die Task erwarteten Eingaben oder leere Liste.
+	 * @return list with expected input or empty list.
 	 */
 	List<FormPropertyTransfer> startTask(String taskId, String user)
 			throws TaskException;
 
 	/**
-	 * Beendet die Task. Die formValues können auch leer oder null sein, falls
-	 * vorher keine Eingaben erwartet wurden.
+	 * Ends a task. formValues may be empty or null.
 	 * 
 	 * @param taskId
 	 * @param userId
@@ -47,29 +45,28 @@ public interface TaskEJBRemote {
 	byte[] getProcessImage(String taskId);
 
 	/**
-	 * Liefert 2 Maps, mit Task-IDs, Task-Namen und Bearbeiter (wenn vorhanden).
+	 * Returns 2 maps, with task-ids, task-names and editor (if exists).
 	 * 
 	 * @param group
-	 * @return Map mit Tasks und Bearbeitern oder leere Map
+	 * @return Map
 	 */
 	Map<String, Pair<String, String>> getAllTasksForGroup(String group);
 
-
 	/**
-	 * Entzieht die Task dem aktuell zugeordneten Nutzer und stellt sie damit
-	 * wieder allen zur Verfügung.
+	 * Dispossesses the task the current editor and makes it available for
+	 * everyone.
 	 * 
 	 * @param taskId
 	 * @throws TaskException
 	 */
-	void entzieheTask(String taskId) throws TaskException;
+	void dispossessTask(String taskId) throws TaskException;
 
 	/**
-	 * Liefert alle Variablen, die im Scope der übergebenen Task sichtbar sind.
+	 * Gets all variables, that are visible in the tasks scope
 	 * 
 	 * @param taskId
 	 * @return
-	 * @throws TaskException 
+	 * @throws TaskException
 	 */
 	Map<String, Object> getVariables(String taskId) throws TaskException;
 }

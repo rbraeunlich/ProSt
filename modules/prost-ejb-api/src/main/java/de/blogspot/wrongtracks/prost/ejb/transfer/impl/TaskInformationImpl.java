@@ -6,7 +6,7 @@ import java.util.Date;
 import de.blogspot.wrongtracks.prost.ejb.transfer.TaskInformation;
 
 /**
- * Klasse für Informationen über beendete Tasks.
+ * Clazz for information about finished tasks.
  * 
  * @author Ronny Bräunlich
  * 

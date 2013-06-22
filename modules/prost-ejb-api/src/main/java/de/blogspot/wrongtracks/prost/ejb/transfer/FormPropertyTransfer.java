@@ -5,9 +5,8 @@ import java.text.DateFormat;
 import java.util.List;
 
 /**
- * Imitiert die Klasse org.activiti.engine.form.FormProperty damit die GUI keine
- * Abhängigkeit zu Activiti hat. Kommentare an den Methoden sind auch davon
- * kopiert.
+ * Imitates the class org.activiti.engine.form.FormProperty so that clients
+ * don't depend on Activiti. Comments are copied, too.
  * 
  * @author Ronny Bräunlich
  * 
@@ -44,11 +43,11 @@ public interface FormPropertyTransfer extends Serializable {
 	boolean isRequired();
 
 	/**
-	 * Liefert extra Informationen entsprechend dem erwarteten Eingabetyp.
+	 * delivers extra informationen according to the expected input.
 	 * <table border="1">
 	 * <tr>
-	 * <th>Typ im XML</th>
-	 * <th>Rückgabewert dieser Methode</th>
+	 * <th>type in BPMN-XML</th>
+	 * <th>retun type</th>
 	 * </tr>
 	 * <tr>
 	 * <td>string</td>

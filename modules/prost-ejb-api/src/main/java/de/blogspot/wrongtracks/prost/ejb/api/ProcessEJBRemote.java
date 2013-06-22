@@ -9,7 +9,7 @@ import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyTransfer;
 import de.blogspot.wrongtracks.prost.ejb.transfer.ProcessInformation;
 
 /**
- * Bean zur Abfrage von Daten über Prozesse.
+ * Bean to get process data.
  * 
  * @author Ronny Bräunlich
  * 
@@ -19,36 +19,24 @@ public interface ProcessEJBRemote {
 
 	/**
 	 * 
-	 * @return Map in welcher Key = Process ID und Value = Name aller deployten
-	 *         Prozesse
+	 * @return Map where key = Process ID and value = process name
 	 */
 	Map<String, String> getDeployedProcesses();
 
 	/**
-	 * Liefert für den übergebenen Prozess die Liste der zum Starten erwarteten
-	 * FormProperties. Falls der Prozess keine erwartet, wird eine leere Liste
-	 * zurück gegeben.
-	 * 
 	 * @param processId
-	 * @return Liste mit {@link FormPropertyTransfer} oder leere Liste
+	 * @return list containing {@link FormPropertyTransfer} oder empty list
 	 */
 	public List<FormPropertyTransfer> getStartFormProperties(String processId);
 
 	/**
-	 * Startet den übergebenen Prozess. Die processVariables können auch leer
-	 * oder null sein.
-	 * 
 	 * @param processId
-	 * @param processVariables
+	 * @param processVariables (may be null)
 	 */
 	void startProcessById(String processId, Map<String, String> processVariables);
 
 	/**
-	 * Liefert Informationen zu allen Prozesses (laufend oder abgeschlossen) in
-	 * Form von {@link ProcessInformation}.
-	 * 
-	 * @return Liste mit {@link ProcessInformation} oder leere Liste, bei keinen
-	 *         Prozessen.
+	 * @return list containing {@link ProcessInformation} oder empty list
 	 */
 	public List<ProcessInformation> getProcessInformationForAllProcesses();
 }

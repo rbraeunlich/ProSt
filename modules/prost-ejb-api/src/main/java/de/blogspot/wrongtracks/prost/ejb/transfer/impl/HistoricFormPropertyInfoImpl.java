@@ -6,13 +6,13 @@ import java.util.Date;
 import de.blogspot.wrongtracks.prost.ejb.transfer.HistoricFormPropertyInfo;
 
 /**
- * Klasse für Informationen über Werte, die über FormProperties eingegeben
- * wurden.
+ * Clazz for historical data, which has been entered as formproperties
  * 
  * @author Ronny Bräunlich
  * 
  */
-public class HistoricFormPropertyInfoImpl implements Serializable, HistoricFormPropertyInfo {
+public class HistoricFormPropertyInfoImpl implements Serializable,
+		HistoricFormPropertyInfo {
 
 	private static final long serialVersionUID = -7089132808797477417L;
 	private String id;
