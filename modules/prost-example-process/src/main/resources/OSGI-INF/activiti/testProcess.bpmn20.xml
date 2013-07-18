@@ -31,7 +31,7 @@
     <bpmn2:userTask id="UserTask_1" name="User Task">
       <bpmn2:extensionElements>
         <activiti:formProperty id="praxisberichtURL" name="Praxisbericht URL" readable="true" required="true" type="url" variable="praxisberichtURL"/>
-      </bpmn2:extensionElements>>
+      </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
     </bpmn2:userTask>
