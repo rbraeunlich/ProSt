@@ -5,6 +5,9 @@ Bundle-Version: 0.0.1
 Bundle-ManifestVersion: 2
 Import-Package: de.blogspot.wrongtracks.prost.ejb.transfer.converter,
  org.activiti.engine.form;version="[5.12.1,6.0.0)",
- org.activiti.osgi.blueprint
+ org.activiti.engine.impl.bpmn.behavior;version="[5.12.1,6.0.0)",
+ org.activiti.engine.impl.pvm.delegate;version="[5.12.1,6.0.0)",
+ org.activiti.osgi.blueprint,
+ org.apache.commons.mail
 Bundle-SymbolicName: de.blogspot.wrongtracks.prost.prost-example-process
 Bundle-ClassPath: .

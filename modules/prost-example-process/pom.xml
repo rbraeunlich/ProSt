@@ -19,5 +19,10 @@
 			<artifactId>prost-ejb</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>de.blogspot.wrongtracks.prost</groupId>
+			<artifactId>activiti-engine-blueprint-wrapper</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 </project>
