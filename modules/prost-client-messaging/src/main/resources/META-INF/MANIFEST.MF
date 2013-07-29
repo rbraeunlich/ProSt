@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-Name: ProSt Client Messaging API
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Version: 0.0.1
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: de.blogspot.wrongtracks.prost.prost-client-messaging
+Bundle-ClassPath: .
+Export-Package: de.blogspot.wrongtracks.prost.msg.api
+Import-Package: de.blogspot.wrongtracks.prost.msg.api
