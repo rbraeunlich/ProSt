@@ -6,4 +6,6 @@ Bundle-ManifestVersion: 2
 Bundle-SymbolicName: de.blogspot.wrongtracks.prost.prost-client-messaging
 Bundle-ClassPath: .
 Export-Package: de.blogspot.wrongtracks.prost.msg.api
-Import-Package: de.blogspot.wrongtracks.prost.msg.api
+Import-Package: de.blogspot.wrongtracks.prost.msg.api,
+ javax.jms,
+ javax.annotation

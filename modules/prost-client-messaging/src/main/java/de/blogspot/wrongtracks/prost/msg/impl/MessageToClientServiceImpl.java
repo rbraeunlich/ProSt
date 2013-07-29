@@ -20,7 +20,7 @@ public class MessageToClientServiceImpl implements MessageToClientService {
 
 	@Resource(mappedName = "java:/ConnectionFactory")
 	private ConnectionFactory factory;
-	@Resource(mappedName = "java:/deg/topic/gui/update")
+	@Resource(mappedName = "java:/prost/topic/gui/update")
 	private Topic topic;
 	private static final Logger logger = Logger
 			.getLogger(MessageToClientServiceImpl.class.getName());
@@ -32,8 +32,8 @@ public class MessageToClientServiceImpl implements MessageToClientService {
 	public void init() {
 		Connection connection = null;
 		try {
-			props.load(MessageToClientServiceImpl.class
-					.getResourceAsStream("connection.properties"));
+			props.load(this.getClass()
+					.getResourceAsStream("/connection.properties"));
 			connection = factory.createConnection(
 					props.getProperty(CONNECTION_USER),
 					props.getProperty(CONNECTION_PWD));
