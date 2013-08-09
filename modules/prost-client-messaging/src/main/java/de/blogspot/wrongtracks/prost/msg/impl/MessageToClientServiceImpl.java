@@ -1,6 +1,5 @@
 package de.blogspot.wrongtracks.prost.msg.impl;
 
-import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,14 +12,15 @@ import javax.jms.Message;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
 import javax.jms.Topic;
+import javax.naming.InitialContext;
 
 import de.blogspot.wrongtracks.prost.msg.api.MessageToClientService;
 
 public class MessageToClientServiceImpl implements MessageToClientService {
 
-	@Resource(mappedName = "java:/ConnectionFactory")
+//	@Resource(mappedName = "java:/ConnectionFactory")
 	private ConnectionFactory factory;
-	@Resource(mappedName = "java:/prost/topic/gui/update")
+//	@Resource(mappedName = "java:/prost/topic/gui/update")
 	private Topic topic;
 	private static final Logger logger = Logger
 			.getLogger(MessageToClientServiceImpl.class.getName());
@@ -30,17 +30,16 @@ public class MessageToClientServiceImpl implements MessageToClientService {
 	private static Connection connection;
 
 	public void init() {
-		Connection connection = null;
 		try {
+			InitialContext context = new InitialContext();
+			factory = (ConnectionFactory) context.lookup("java:/ConnectionFactory");
 			props.load(this.getClass()
 					.getResourceAsStream("/connection.properties"));
-			connection = factory.createConnection(
-					props.getProperty(CONNECTION_USER),
-					props.getProperty(CONNECTION_PWD));
+			connection = factory.createConnection("prostMessaging",
+					"messaging0!");
 			connection.start();
-		} catch (JMSException e) {
-			throw new RuntimeException(e);
-		} catch (IOException e) {
+			topic = (Topic) context.lookup("java:/prost/topic/gui/update");
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
