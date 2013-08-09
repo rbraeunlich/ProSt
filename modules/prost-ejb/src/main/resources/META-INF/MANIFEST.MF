@@ -6,6 +6,7 @@ Bundle-ManifestVersion: 2
 Import-Package: de.blogspot.wrongtracks.prost.ejb.api,
  de.blogspot.wrongtracks.prost.ejb.transfer,
  de.blogspot.wrongtracks.prost.ejb.exception,
+ de.blogspot.wrongtracks.prost.msg.api,
  javax.ejb,
  javax.annotation,
  org.activiti.engine;version="[5.12.1,6.0.0)",

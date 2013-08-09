@@ -37,6 +37,7 @@ import de.blogspot.wrongtracks.prost.ejb.exception.ServiceUnavailableException;
 import de.blogspot.wrongtracks.prost.ejb.exception.TaskException;
 import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyTransfer;
 import de.blogspot.wrongtracks.prost.ejb.transfer.converter.impl.FormPropertyConverters;
+import de.blogspot.wrongtracks.prost.msg.api.MessageToClientService;
 
 @Stateless(name = "TaskEJB")
 public class TaskEJB implements TaskEJBRemote {
@@ -49,10 +50,8 @@ public class TaskEJB implements TaskEJBRemote {
 	private ServiceTracker runtimeServiceTracker;
 	private ServiceTracker repositoryServiceTracker;
 	private static final String TASK_UNAVAILABLE_PROP_KEY = "taskUnavailable";
-
-	// @Inject
-	// FIXME eventing!
-	// private Event<TaskBesitzerGewechseltEvent> taskBesitzerGewechseltEvent;
+	//TODO integrate somehow with CDI-eventing and maybe PAX-CDI
+	private ServiceTracker messengerTracker;
 
 	@PostConstruct
 	public void init() {
@@ -68,6 +67,9 @@ public class TaskEJB implements TaskEJBRemote {
 		repositoryServiceTracker = new ServiceTracker(context,
 				RepositoryService.class.getName(), null);
 		repositoryServiceTracker.open();
+		messengerTracker = new ServiceTracker(context,
+				MessageToClientService.class.getName(), null);
+		messengerTracker.open();
 		try {
 			props.load(this.getClass().getResourceAsStream(
 					"error-msg.properties"));
@@ -82,6 +84,7 @@ public class TaskEJB implements TaskEJBRemote {
 		formServiceTracker.close();
 		runtimeServiceTracker.close();
 		repositoryServiceTracker.close();
+		messengerTracker.close();
 	}
 
 	/**
@@ -104,10 +107,10 @@ public class TaskEJB implements TaskEJBRemote {
 		try {
 			getService(TaskService.class, taskServiceTracker).claim(taskId,
 					user);
-			// taskBesitzerGewechseltEvent.fire(new
-			// TaskBesitzerGewechseltEvent());
+			getService(MessageToClientService.class, messengerTracker)
+					.sendGuiUpdateMessage();
 		} catch (ActivitiException ae) {
-			pruefeObGrundTaskWegIstUndWerfeTaskException(ae);
+			checkIfTaskWasTaken(ae);
 			throw ae;
 		}
 		List<FormProperty> formProperties = getService(FormService.class,
@@ -138,9 +141,11 @@ public class TaskEJB implements TaskEJBRemote {
 						.submitTaskFormData(taskId, formValues);
 			}
 		} catch (ActivitiException ae) {
-			pruefeObGrundTaskWegIstUndWerfeTaskException(ae);
+			checkIfTaskWasTaken(ae);
 			throw ae;
 		}
+		getService(MessageToClientService.class, messengerTracker)
+		.sendGuiUpdateMessage();
 	}
 
 	@Override
@@ -215,17 +220,18 @@ public class TaskEJB implements TaskEJBRemote {
 			getService(TaskService.class, taskServiceTracker).claim(taskId,
 					null);
 		} catch (ActivitiException ae) {
-			pruefeObGrundTaskWegIstUndWerfeTaskException(ae);
+			checkIfTaskWasTaken(ae);
 			throw ae;
 		}
 		/*
 		 * Changing the assignee is not (yet) an event for Activiti That's why I
 		 * have to my own to make clients update the GUI
 		 */
-		// taskBesitzerGewechseltEvent.fire(new TaskBesitzerGewechseltEvent());
+		getService(MessageToClientService.class, messengerTracker)
+		.sendGuiUpdateMessage();
 	}
 
-	private void pruefeObGrundTaskWegIstUndWerfeTaskException(
+	private void checkIfTaskWasTaken(
 			ActivitiException ae) throws TaskException {
 		if (ae.getMessage().contains("Cannot find task")) {
 			throw new TaskException(

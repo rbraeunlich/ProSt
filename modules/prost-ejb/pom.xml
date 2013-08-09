@@ -29,5 +29,10 @@
 			<artifactId>org.osgi.enterprise</artifactId>
 			<version>${osgi-version}</version>
 		</dependency>
+		<dependency>
+			<groupId>de.blogspot.wrongtracks.prost</groupId>
+			<artifactId>prost-client-msg-api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 </project>
