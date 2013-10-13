@@ -33,8 +33,9 @@ public class MessageToClientServiceImpl implements MessageToClientService {
 		try {
 			InitialContext context = new InitialContext();
 			factory = (ConnectionFactory) context.lookup("java:/ConnectionFactory");
-			props.load(this.getClass()
-					.getResourceAsStream("/connection.properties"));
+			//FIXME use properties file
+//			props.load(this.getClass()
+//					.getResourceAsStream("/connection.properties"));
 			connection = factory.createConnection("prostMessaging",
 					"messaging0!");
 			connection.start();
