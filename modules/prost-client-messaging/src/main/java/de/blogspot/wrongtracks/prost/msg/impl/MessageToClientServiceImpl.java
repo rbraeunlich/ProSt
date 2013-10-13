@@ -18,9 +18,9 @@ import de.blogspot.wrongtracks.prost.msg.api.MessageToClientService;
 
 public class MessageToClientServiceImpl implements MessageToClientService {
 
-//	@Resource(mappedName = "java:/ConnectionFactory")
+	@Resource(name = "ConnectionFactory")
 	private ConnectionFactory factory;
-//	@Resource(mappedName = "java:/prost/topic/gui/update")
+	@Resource(mappedName = "java:/prost/topic/gui/update")
 	private Topic topic;
 	private static final Logger logger = Logger
 			.getLogger(MessageToClientServiceImpl.class.getName());
