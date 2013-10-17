@@ -18,9 +18,7 @@ import de.blogspot.wrongtracks.prost.msg.api.MessageToClientService;
 
 public class MessageToClientServiceImpl implements MessageToClientService {
 
-	@Resource(name = "ConnectionFactory")
 	private ConnectionFactory factory;
-	@Resource(mappedName = "java:/prost/topic/gui/update")
 	private Topic topic;
 	private static final Logger logger = Logger
 			.getLogger(MessageToClientServiceImpl.class.getName());
@@ -33,11 +31,10 @@ public class MessageToClientServiceImpl implements MessageToClientService {
 		try {
 			InitialContext context = new InitialContext();
 			factory = (ConnectionFactory) context.lookup("java:/ConnectionFactory");
-			//FIXME use properties file
-//			props.load(this.getClass()
-//					.getResourceAsStream("/connection.properties"));
-			connection = factory.createConnection("prostMessaging",
-					"messaging0!");
+			props.load(this.getClass()
+					.getResourceAsStream("/connection.properties"));
+			connection = factory.createConnection(props.getProperty(CONNECTION_USER),
+					props.getProperty(CONNECTION_PWD));
 			connection.start();
 			topic = (Topic) context.lookup("java:/prost/topic/gui/update");
 		} catch (Exception e) {
