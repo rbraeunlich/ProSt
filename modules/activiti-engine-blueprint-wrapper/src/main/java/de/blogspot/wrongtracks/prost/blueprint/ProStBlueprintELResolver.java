@@ -28,18 +28,19 @@ public class ProStBlueprintELResolver extends BlueprintELResolver {
 	}
 
 	@SuppressWarnings("rawtypes")
-	public void bindBehaviour(ActivityBehavior delegate, Map props) {
+	public void bindBehaviour(ActivityBehavior behavior, Map props) {
 		String name = (String) props.get("osgi.service.blueprint.compname");
-		delegateMap.put(name, delegate);
+		delegateMap.put(name, behavior);
+		LOGGER.info("Added Activiti behavior to behavior cache " + name);
 	}
 
 	@SuppressWarnings("rawtypes")
-	public void unbindBehaviour(ActivityBehavior delegate, Map props) {
+	public void unbindBehaviour(ActivityBehavior behavior, Map props) {
 		String name = (String) props.get("osgi.service.blueprint.compname");
 		if (delegateMap.containsKey(name)) {
 			delegateMap.remove(name);
 		}
-		LOGGER.info("removed Activiti service from delegate cache " + name);
+		LOGGER.info("removed Activiti behavior from behavior cache " + name);
 	}
 
 }
