@@ -15,6 +15,8 @@ Import-Package: de.blogspot.wrongtracks.prost.ejb.transfer.converter,
  org.activiti.osgi.blueprint,
  org.apache.commons.mail,
  org.osgi.framework
+Export-Package: de.blogspot.wrongtracks.prost.example.behaviour,
+ de.blogspot.wrongtracks.prost.example.form
 Bundle-SymbolicName: de.blogspot.wrongtracks.prost.prost-example-process
 Bundle-ClassPath: .
 Bundle-Activator: de.blogspot.wrongtracks.prost.example.Activator
