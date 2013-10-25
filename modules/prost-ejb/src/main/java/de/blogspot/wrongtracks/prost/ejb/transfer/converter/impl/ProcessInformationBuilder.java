@@ -22,6 +22,10 @@ public class ProcessInformationBuilder {
 
 	private HistoryService historyService;
 
+	public ProcessInformationBuilder(HistoryService service) {
+		historyService = service;
+	}
+
 	/**
 	 * Create {@link ProcessInformation} for all processes, that exist or ever
 	 * existed in the database

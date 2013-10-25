@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import javax.ejb.Stateless;
 
 import org.activiti.engine.FormService;
+import org.activiti.engine.HistoryService;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.form.FormProperty;
@@ -38,6 +39,8 @@ public class ProcessEJB implements ProcessEJBRemote {
 
 	private ServiceTracker runtimeServiceTracker;
 
+	private ServiceTracker historyServiceTracker;
+
 	@Resource
 	private BundleContext context;
 
@@ -58,6 +61,9 @@ public class ProcessEJB implements ProcessEJBRemote {
 		runtimeServiceTracker = new ServiceTracker(context,
 				RuntimeService.class.getName(), null);
 		runtimeServiceTracker.open();
+		historyServiceTracker = new ServiceTracker(context,
+				HistoryService.class.getName(), null);
+		historyServiceTracker.open();
 	}
 
 	@PreDestroy
@@ -65,6 +71,7 @@ public class ProcessEJB implements ProcessEJBRemote {
 		repositoryServiceTracker.close();
 		formServiceTracker.close();
 		runtimeServiceTracker.close();
+		historyServiceTracker.close();
 	}
 
 	@Override
@@ -108,7 +115,8 @@ public class ProcessEJB implements ProcessEJBRemote {
 
 	@Override
 	public List<ProcessInformation> getProcessInformationForAllProcesses() {
-		return Collections.unmodifiableList(new ProcessInformationBuilder()
+		ProcessInformationBuilder processInformationBuilder = new ProcessInformationBuilder(getService(HistoryService.class, historyServiceTracker));
+		return Collections.unmodifiableList(processInformationBuilder
 				.buildProcessInformationForAllHistoricProcesses());
 	}
 
