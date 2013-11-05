@@ -14,27 +14,27 @@
 	</reference-list>
 
 	<bean id="booleanFormPropertyConverter"
-		class="de.blogspot.wrongtracks.prost.ejb.transfer.impl.BooleanFormPropertyConverter" />
+		class="de.blogspot.wrongtracks.prost.ejb.transfer.converter.impl.BooleanFormPropertyConverter" />
 	<service ref="booleanFormPropertyConverter"
 		interface="de.blogspot.wrongtracks.prost.ejb.transfer.converter.FormPropertyConverter" />
 
 	<bean id="dateFormPropertyConverter"
-		class="de.blogspot.wrongtracks.prost.ejb.transfer.impl.DateFormPropertyConverter" />
+		class="de.blogspot.wrongtracks.prost.ejb.transfer.converter.impl.DateFormPropertyConverter" />
 	<service ref="dateFormPropertyConverter"
 		interface="de.blogspot.wrongtracks.prost.ejb.transfer.converter.FormPropertyConverter" />
 
 	<bean id="enumFormPropertyConverter"
-		class="de.blogspot.wrongtracks.prost.ejb.transfer.impl.EnumFormPropertyConverter" />
+		class="de.blogspot.wrongtracks.prost.ejb.transfer.converter.impl.EnumFormPropertyConverter" />
 	<service ref="enumFormPropertyConverter"
 		interface="de.blogspot.wrongtracks.prost.ejb.transfer.converter.FormPropertyConverter" />
 
 	<bean id="longFormPropertyConverter"
-		class="de.blogspot.wrongtracks.prost.ejb.transfer.impl.LongFormPropertyConverter" />
+		class="de.blogspot.wrongtracks.prost.ejb.transfer.converter.impl.LongFormPropertyConverter" />
 	<service ref="longFormPropertyConverter"
 		interface="de.blogspot.wrongtracks.prost.ejb.transfer.converter.FormPropertyConverter" />
 
 	<bean id="stringFormPropertyConverter"
-		class="de.blogspot.wrongtracks.prost.ejb.transfer.impl.StringFormPropertyConverter" />
+		class="de.blogspot.wrongtracks.prost.ejb.transfer.converter.impl.StringFormPropertyConverter" />
 	<service ref="stringFormPropertyConverter"
 		interface="de.blogspot.wrongtracks.prost.ejb.transfer.converter.FormPropertyConverter" />
 	<!-- ############ End converter registration ############ -->
