@@ -1,4 +1,4 @@
-package de.blogspot.wrongtracks.prost.ejb.transfer.impl;
+package de.blogspot.wrongtracks.prost.ejb.transfer.converter.impl;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

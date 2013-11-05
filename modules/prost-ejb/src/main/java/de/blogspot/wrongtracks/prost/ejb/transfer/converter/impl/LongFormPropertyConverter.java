@@ -1,4 +1,4 @@
-package de.blogspot.wrongtracks.prost.ejb.transfer.impl;
+package de.blogspot.wrongtracks.prost.ejb.transfer.converter.impl;
 
 import org.activiti.engine.form.FormProperty;
 import org.activiti.engine.impl.form.LongFormType;

@@ -71,8 +71,8 @@ public class TaskEJB implements TaskEJBRemote {
 				MessageToClientService.class.getName(), null);
 		messengerTracker.open();
 		try {
-			props.load(this.getClass().getResourceAsStream(
-					"error-msg.properties"));
+			props.load(TaskEJB.class.getResourceAsStream(
+					"/error-msg.properties"));
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
