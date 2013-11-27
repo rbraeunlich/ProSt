@@ -82,7 +82,7 @@ public class ProcessEJB implements ProcessEJBRemote {
 		Map<String, String> result = new HashMap<String, String>(
 				processDefinitions.size());
 		for (ProcessDefinition definition : processDefinitions) {
-			result.put(definition.getId(), definition.getName());
+			result.put(String.valueOf(definition.getId()),String.valueOf( definition.getName()));
 		}
 		return Collections.unmodifiableMap(result);
 	}
