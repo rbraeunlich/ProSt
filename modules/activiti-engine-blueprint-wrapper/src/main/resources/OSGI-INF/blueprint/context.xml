@@ -16,7 +16,6 @@
 
 	<bean id="configuration" factory-ref="configurationFactory"
 		factory-method="getConfiguration">
-		<property name="mailServerHost" value="svdominonb.nb.deg.local"/>
 	</bean>
 
 	<bean id="processEngineFactory"
