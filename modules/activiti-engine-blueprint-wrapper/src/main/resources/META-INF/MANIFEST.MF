@@ -5,7 +5,9 @@ Bundle-Version: 0.0.1
 Bundle-ManifestVersion: 2
 Bundle-SymbolicName: de.blogspot.wrongtracks.prost.activiti-engine-blueprint-wrapper
 Bundle-ClassPath: .
-Import-Package: org.activiti.engine;org.activiti.engine.delegate;version="[5.12.1,6.0.0)",
+Import-Package: org.activiti.engine;version="[5.12.1,6.0.0)",
+ org.activiti.engine.delegate;version="[5.12.1,6.0.0)",
+ org.activiti.engine.impl.pvm.delegate;version="[5.12.1,6.0.0)",
  org.activiti.osgi.blueprint,
  org.h2.jdbcx;version="[1.0.0,2.0.0)"
 DynamicImport-Package: *

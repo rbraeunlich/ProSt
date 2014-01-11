@@ -17,6 +17,8 @@
 		<module>modules/activiti-engine-blueprint-wrapper</module>
 		<module>modules/prost-ejb-api</module>
 		<module>modules/prost-ejb</module>
+		<module>modules/prost-client-msg-api</module>
+		<module>modules/prost-client-messaging</module>
 	</modules>
 	<repositories>
 		<repository>

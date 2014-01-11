@@ -1,21 +1,21 @@
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
-	xmlns:ext="http://aries.apache.org/blueprint/xmlns/blueprint-ext/v1.0.0">
-
-	<ext:property-placeholder />
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0
+			http://www.w3.org/2001/XMLSchema-instance">
 
 	<bean id="dataSource" class="org.h2.jdbcx.JdbcDataSource">
 		<property name="URL" value="jdbc:h2:~/test" />
 		<property name="user" value="sa" />
 		<property name="password" value="" />
 	</bean>
-	
+
 	<bean id="configurationFactory" class="org.activiti.osgi.blueprint.ConfigurationFactory">
 		<property name="dataSource" ref="dataSource" />
 		<property name="databaseSchemaUpdate" value="true" />
 	</bean>
 
 	<bean id="configuration" factory-ref="configurationFactory"
-		factory-method="getConfiguration" >
+		factory-method="getConfiguration">
 	</bean>
 
 	<bean id="processEngineFactory"
@@ -55,11 +55,18 @@
 
 	<reference-list id="activityProviders" availability="optional"
 		interface="org.activiti.engine.delegate.JavaDelegate" activation="eager">
-
 		<reference-listener ref="blueprintELResolver"
 			bind-method="bindService" unbind-method="unbindService" />
 	</reference-list>
 
-	<bean id="blueprintELResolver" class="org.activiti.osgi.blueprint.BlueprintELResolver" />
+	<reference-list id="activityBehaviours" availability="optional"
+		interface="org.activiti.engine.impl.pvm.delegate.ActivityBehavior"
+		activation="eager">
+		<reference-listener ref="blueprintELResolver"
+			bind-method="bindBehaviour" unbind-method="unbindBehaviour" />
+	</reference-list>
+
+	<bean id="blueprintELResolver"
+		class="de.blogspot.wrongtracks.prost.blueprint.ProStBlueprintELResolver" />
 </blueprint>
 

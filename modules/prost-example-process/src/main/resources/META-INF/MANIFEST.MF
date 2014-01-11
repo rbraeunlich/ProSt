@@ -1,9 +1,23 @@
 Manifest-Version: 1.0
-Bundle-Name: ProSt Exmaple
+Bundle-Name: ProSt Example
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Version: 0.0.1
 Bundle-ManifestVersion: 2
 Import-Package: de.blogspot.wrongtracks.prost.ejb.transfer.converter,
  org.activiti.engine.form;version="[5.12.1,6.0.0)",
+ org.activiti.engine.impl.bpmn.behavior;version="[5.12.1,6.0.0)",
+ org.activiti.engine.impl.pvm.delegate;version="[5.12.1,6.0.0)",
+ org.activiti.engine.impl.cfg;version="[5.12.1,6.0.0)",
+ org.activiti.engine.impl.form;version="[5.12.1,6.0.0)",
+ org.activiti.engine.impl;version="[5.12.1,6.0.0)",
+ org.activiti.engine.delegate;version="[5.12.1,6.0.0)",
+ org.activiti.engine;version="[5.12.1,6.0.0)",
+ org.activiti.osgi.blueprint,
+ org.apache.commons.mail,
+ org.osgi.framework,
+ de.blogspot.wrongtracks.prost.ejb.transfer,
+Export-Package: de.blogspot.wrongtracks.prost.example.behaviour,
+ de.blogspot.wrongtracks.prost.example.form
 Bundle-SymbolicName: de.blogspot.wrongtracks.prost.prost-example-process
 Bundle-ClassPath: .
+Bundle-Activator: de.blogspot.wrongtracks.prost.example.Activator
