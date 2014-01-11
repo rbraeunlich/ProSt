@@ -1,0 +1,27 @@
+// ------------------------------------------------------------------
+// Transitive dependencies of this project determined from the
+// maven pom organized by organization.
+// ------------------------------------------------------------------
+
+Apache Aries Blueprint Core
+
+
+From: 'ObjectWeb' (http://www.objectweb.org/)
+  - ASM All (http://asm.objectweb.org/asm-all/) org.ow2.asm:asm-all:jar:4.0
+    License: BSD  (http://asm.objectweb.org/license.html)
+
+From: 'The Apache Software Foundation' (http://www.apache.org)
+  - Apache Aries Util (http://aries.apache.org/default-parent/java5-parent/org.apache.aries.util) org.apache.aries:org.apache.aries.util:bundle:1.0.0
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+  - Apache Aries Blueprint Annotation API (http://aries.apache.org/default-parent/java5-parent/org.apache.aries.blueprint.annotation.api) org.apache.aries.blueprint:org.apache.aries.blueprint.annotation.api:bundle:1.0.0
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+  - Apache Aries Blueprint API (http://aries.apache.org/default-parent/java5-parent/org.apache.aries.blueprint.api) org.apache.aries.blueprint:org.apache.aries.blueprint.api:bundle:1.0.0
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+  - Apache Aries Proxy API (http://aries.apache.org/default-parent/java5-parent/org.apache.aries.proxy.api) org.apache.aries.proxy:org.apache.aries.proxy.api:bundle:1.0.0
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+  - Apache Aries Quiesce API (http://aries.apache.org/default-parent/java5-parent/org.apache.aries.quiesce.api) org.apache.aries.quiesce:org.apache.aries.quiesce.api:bundle:1.0.0
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+
+
+
+
