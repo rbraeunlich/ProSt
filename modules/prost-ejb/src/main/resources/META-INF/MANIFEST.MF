@@ -6,7 +6,7 @@ Bundle-ManifestVersion: 2
 Import-Package: de.blogspot.wrongtracks.prost.ejb.api,
  de.blogspot.wrongtracks.prost.ejb.transfer,
  de.blogspot.wrongtracks.prost.ejb.exception,
- de.blogspot.wrongtracks.prost.msg.api,
+ de.blogspot.wrongtracks.prost.msg.api;resolution="optional",
  de.blogspot.wrongtracks.prost.ejb.transfer.impl,
  javax.ejb,
  javax.annotation,

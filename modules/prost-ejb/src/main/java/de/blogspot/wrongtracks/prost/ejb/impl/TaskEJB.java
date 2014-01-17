@@ -112,6 +112,9 @@ public class TaskEJB implements TaskEJBRemote {
 		} catch (ActivitiException ae) {
 			checkIfTaskWasTaken(ae);
 			throw ae;
+		}catch(ServiceUnavailableException sue){
+			//messaging is unavailable, that's ok
+			sue.printStackTrace();
 		}
 		List<FormProperty> formProperties = getService(FormService.class,
 				formServiceTracker).getTaskFormData(taskId).getFormProperties();
