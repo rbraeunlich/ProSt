@@ -3,8 +3,6 @@ package de.blogspot.wrongtracks.prost.ejb.api;
 import java.util.List;
 import java.util.Map;
 
-import javax.ejb.Remote;
-
 import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyTransfer;
 import de.blogspot.wrongtracks.prost.ejb.transfer.ProcessInformation;
 

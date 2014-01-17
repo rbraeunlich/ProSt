@@ -3,8 +3,6 @@ package de.blogspot.wrongtracks.prost.ejb.api;
 import java.util.List;
 import java.util.Map;
 
-import javax.ejb.Remote;
-
 import org.apache.commons.lang3.tuple.Pair;
 
 import de.blogspot.wrongtracks.prost.ejb.exception.TaskException;

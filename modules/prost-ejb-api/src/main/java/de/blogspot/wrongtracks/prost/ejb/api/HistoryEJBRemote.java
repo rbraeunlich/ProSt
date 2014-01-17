@@ -2,8 +2,6 @@ package de.blogspot.wrongtracks.prost.ejb.api;
 
 import java.util.List;
 
-import javax.ejb.Remote;
-
 import de.blogspot.wrongtracks.prost.ejb.transfer.HistoricFormPropertyInfo;
 
 /**
