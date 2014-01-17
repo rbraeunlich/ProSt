@@ -14,7 +14,6 @@ import de.blogspot.wrongtracks.prost.ejb.transfer.ProcessInformation;
  * @author Ronny Bräunlich
  * 
  */
-@Remote
 public interface ProcessEJBRemote {
 
 	/**

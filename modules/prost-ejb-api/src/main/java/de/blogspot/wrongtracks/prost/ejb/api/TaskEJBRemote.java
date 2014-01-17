@@ -16,7 +16,6 @@ import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyTransfer;
  * @author Ronny Bräunlich
  * 
  */
-@Remote
 public interface TaskEJBRemote {
 
 	Map<String, String> getTasksForUser(String user);

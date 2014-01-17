@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
+import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import org.activiti.engine.HistoryService;
@@ -20,6 +21,7 @@ import de.blogspot.wrongtracks.prost.ejb.exception.ServiceUnavailableException;
 import de.blogspot.wrongtracks.prost.ejb.transfer.HistoricFormPropertyInfo;
 import de.blogspot.wrongtracks.prost.ejb.transfer.impl.HistoricFormPropertyInfoImpl;
 
+@Remote(HistoryEJBRemote.class)
 @Stateless(name = "HistoryEJB")
 public class HistoryEJB implements HistoryEJBRemote {
 

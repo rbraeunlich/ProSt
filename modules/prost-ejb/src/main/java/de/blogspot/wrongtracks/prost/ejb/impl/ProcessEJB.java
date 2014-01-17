@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
+import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import org.activiti.engine.FormService;
@@ -30,6 +31,7 @@ import de.blogspot.wrongtracks.prost.ejb.transfer.converter.impl.ProcessInformat
 /**
  * Session Bean implementation class ProcessEJB
  */
+@Remote(ProcessEJBRemote.class)
 @Stateless(name = "ProcessEJB")
 public class ProcessEJB implements ProcessEJBRemote {
 

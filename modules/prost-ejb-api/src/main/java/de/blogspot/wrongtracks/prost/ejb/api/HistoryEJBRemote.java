@@ -12,7 +12,6 @@ import de.blogspot.wrongtracks.prost.ejb.transfer.HistoricFormPropertyInfo;
  * @author Ronny Bräunlich
  * 
  */
-@Remote
 public interface HistoryEJBRemote {
 
 	/**

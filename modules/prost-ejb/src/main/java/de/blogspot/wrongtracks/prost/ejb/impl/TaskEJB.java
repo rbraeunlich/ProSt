@@ -13,6 +13,7 @@ import java.util.Properties;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
+import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import org.activiti.bpmn.model.BpmnModel;
@@ -39,6 +40,7 @@ import de.blogspot.wrongtracks.prost.ejb.transfer.FormPropertyTransfer;
 import de.blogspot.wrongtracks.prost.ejb.transfer.converter.impl.FormPropertyConverters;
 import de.blogspot.wrongtracks.prost.msg.api.MessageToClientService;
 
+@Remote(TaskEJBRemote.class)
 @Stateless(name = "TaskEJB")
 public class TaskEJB implements TaskEJBRemote {
 
