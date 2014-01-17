@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+  <classpathentry kind="src" path="src/test/java" output="target/test-classes" including="**/*.java"/>
+  <classpathentry kind="src" path="src/test/resources" output="target/test-classes" including="**/*" excluding="**/*.java"/>
+  <classpathentry kind="src" path="src/main/java"/>
+  <classpathentry kind="src" path="src/main/resources" excluding="**/*.java"/>
+  <classpathentry kind="src" path="target/maven-shared-archive-resources" excluding="**/*.java"/>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/aries/blueprint/org.apache.aries.blueprint.api/1.0.0/org.apache.aries.blueprint.api-1.0.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/aries/blueprint/org.apache.aries.blueprint.annotation.api/1.0.0/org.apache.aries.blueprint.annotation.api-1.0.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/aries/blueprint/blueprint-parser/1.1.0/blueprint-parser-1.1.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/aries/org.apache.aries.util/1.0.0/org.apache.aries.util-1.0.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/osgi/org.osgi.core/4.2.0/org.osgi.core-4.2.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/osgi/org.osgi.compendium/4.2.0/org.osgi.compendium-4.2.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-api/1.5.11/slf4j-api-1.5.11.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/slf4j/slf4j-simple/1.5.11/slf4j-simple-1.5.11.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/ow2/asm/asm-all/4.0/asm-all-4.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/aries/quiesce/org.apache.aries.quiesce.api/1.0.0/org.apache.aries.quiesce.api-1.0.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/aries/testsupport/org.apache.aries.testsupport.unit/1.0.0/org.apache.aries.testsupport.unit-1.0.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/ops4j/pax/exam/pax-exam/1.2.3/pax-exam-1.2.3.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/ops4j/base/ops4j-base-lang/1.2.2/ops4j-base-lang-1.2.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/ops4j/base/ops4j-base-store/1.2.2/ops4j-base-store-1.2.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/ops4j/base/ops4j-base-io/1.2.2/ops4j-base-io-1.2.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/ops4j/base/ops4j-base-monitors/1.2.2/ops4j-base-monitors-1.2.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/ops4j/pax/exam/pax-exam-container-default/1.2.3/pax-exam-container-default-1.2.3.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/ops4j/pax/exam/pax-exam-spi/1.2.3/pax-exam-spi-1.2.3.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/ops4j/pax/exam/pax-exam-container-rbc-client/1.2.3/pax-exam-container-rbc-client-1.2.3.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/ops4j/pax/exam/pax-exam-container-rbc/1.2.3/pax-exam-container-rbc-1.2.3.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/ops4j/base/ops4j-base-net/1.2.2/ops4j-base-net-1.2.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/ops4j/pax/runner/pax-runner-no-jcl/1.4.0/pax-runner-no-jcl-1.4.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/aries/proxy/org.apache.aries.proxy.api/1.0.0/org.apache.aries.proxy.api-1.0.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/apache/aries/proxy/org.apache.aries.proxy.impl/1.0.0/org.apache.aries.proxy.impl-1.0.0.jar"/>
+  <classpathentry kind="var" path="M2_REPO/junit/junit/4.8.1/junit-4.8.1.jar" sourcepath="M2_REPO/junit/junit/4.8.1/junit-4.8.1-sources.jar"/>
+</classpath>

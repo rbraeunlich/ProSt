@@ -7,3 +7,5 @@ Special Thanks to:
 
 * Florian B. for the name
 * Katrin P. for the icon
+
+The modules contain a modified version of the Apache Aries Blueprint-Core project. I changed the ReflectionUtils class so it would recognize setters that don't return void. Because you can't compile it without the parent POM I included the target directory containing a compiled jar.
