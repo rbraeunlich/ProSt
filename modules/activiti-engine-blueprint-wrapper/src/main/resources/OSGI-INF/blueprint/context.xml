@@ -61,12 +61,14 @@
 
 	<reference-list id="activityBehaviours" availability="optional"
 		interface="org.activiti.engine.impl.pvm.delegate.ActivityBehavior"
-		activation="eager">
+		activation="eager" member-type="service-reference">
 		<reference-listener ref="blueprintELResolver"
 			bind-method="bindBehaviour" unbind-method="unbindBehaviour" />
 	</reference-list>
 
 	<bean id="blueprintELResolver"
-		class="de.blogspot.wrongtracks.prost.blueprint.ProStBlueprintELResolver" />
+		class="de.blogspot.wrongtracks.prost.blueprint.ProStBlueprintELResolver" >
+		<property name="context" ref="blueprintBundleContext"/>
+	</bean>
 </blueprint>
 
