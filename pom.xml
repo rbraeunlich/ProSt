@@ -19,6 +19,7 @@
 		<module>modules/prost-ejb</module>
 		<module>modules/prost-client-msg-api</module>
 		<module>modules/prost-client-messaging</module>
+		<module>modules/prost-example-process</module>
 	</modules>
 	<repositories>
 		<repository>
