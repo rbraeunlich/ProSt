@@ -8,7 +8,7 @@
     <bpmn2:endEvent id="EndEvent_1" name="End Event">
       <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
     </bpmn2:endEvent>
-    <bpmn2:serviceTask id="ServiceTask_1" activiti:class="de.blogspot.wrongtracks.prost.example.behaviour.SendMailWithAttachmentBehaviour" name="Benachrichtigung" implementation="##WebService">
+    <bpmn2:serviceTask id="ServiceTask_1" activiti:delegateExpression="${sendMailWithAttachment}" name="Benachrichtigung" implementation="##WebService">
 	<bpmn2:extensionElements>
         <activiti:field expression="${mail}" name="to"/>
         <activiti:field name="from" stringValue="Activiti-Engine@test.de"/>
