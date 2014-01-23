@@ -47,12 +47,17 @@ public class SendMailWithAttachmentBehaviour extends MailActivityBehavior{
 		String dateiname = uploadUrl.toString().substring(
 				uploadUrl.toString().lastIndexOf("/") + 1);
 		attachment.setName(dateiname);
-
+		//XXX I gotta change the CCL to get the test running
+		ClassLoader ccl = Thread.currentThread().getContextClassLoader();
 		try {
 			email.attach(attachment);
+			Thread.currentThread().setContextClassLoader(email.getClass().getClassLoader());
 			email.send();
 		} catch (EmailException e) {
 			throw new ActivitiException("Could not send e-mail", e);
+		}
+		finally{
+			Thread.currentThread().setContextClassLoader(ccl);
 		}
 		leave(execution);
 	}
