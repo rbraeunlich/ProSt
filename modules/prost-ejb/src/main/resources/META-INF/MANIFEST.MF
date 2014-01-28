@@ -6,8 +6,9 @@ Bundle-ManifestVersion: 2
 Import-Package: de.blogspot.wrongtracks.prost.ejb.api,
  de.blogspot.wrongtracks.prost.ejb.transfer,
  de.blogspot.wrongtracks.prost.ejb.exception,
- de.blogspot.wrongtracks.prost.msg.api;resolution="optional",
+ de.blogspot.wrongtracks.prost.msg.api;resolution:="optional",
  de.blogspot.wrongtracks.prost.ejb.transfer.impl,
+ de.blogspot.wrongtracks.prost.ejb.transfer.converter,
  javax.ejb,
  javax.annotation,
  org.activiti.engine;version="[5.12.1,6.0.0)",
@@ -24,5 +25,4 @@ Import-Package: de.blogspot.wrongtracks.prost.ejb.api,
  org.apache.commons.lang3.tuple;version="[3.0.0,4.0.0)",
 Bundle-SymbolicName: de.blogspot.wrongtracks.prost.prost-ejb
 Bundle-ClassPath: .
-Export-Package: 
 Export-EJB: 
