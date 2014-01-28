@@ -9,6 +9,7 @@ Bundle-Name: ProSt EJB API
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Version: 0.0.1
 Bundle-ManifestVersion: 2
-Import-Package: org.apache.commons.lang3.tuple;version="[3.0.0,4.0.0)"
+Import-Package: org.apache.commons.lang3.tuple;version="[3.0.0,4.0.0)",
+ org.activiti.engine.form;version="[5.12.1,6.0.0)"
 Bundle-SymbolicName: de.blogspot.wrongtracks.prost.prost-ejb-api
 Bundle-ClassPath: .
