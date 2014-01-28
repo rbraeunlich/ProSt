@@ -8,6 +8,5 @@ Bundle-ClassPath: .
 Import-Package: org.activiti.engine;version="[5.12.1,6.0.0)",
  org.activiti.engine.delegate;version="[5.12.1,6.0.0)",
  org.activiti.engine.impl.pvm.delegate;version="[5.12.1,6.0.0)",
- org.activiti.osgi.blueprint,
- org.h2.jdbcx;version="[1.0.0,2.0.0)"
+ org.activiti.osgi.blueprint
 DynamicImport-Package: *
