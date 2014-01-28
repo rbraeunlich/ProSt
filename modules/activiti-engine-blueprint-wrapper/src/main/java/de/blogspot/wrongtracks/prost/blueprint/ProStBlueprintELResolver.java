@@ -11,6 +11,8 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
 public class ProStBlueprintELResolver extends BlueprintELResolver {
+	
+	private static final String OSGI_SERVICE_BLUEPRINT_COMPNAME = "osgi.service.blueprint.compname";
 	private static final Logger LOGGER = Logger
 			.getLogger(ProStBlueprintELResolver.class.getName());
 	private Map<String, ServiceReference> delegateMap = new HashMap<String, ServiceReference>();
@@ -31,13 +33,17 @@ public class ProStBlueprintELResolver extends BlueprintELResolver {
 	}
 
 	public void bindBehaviour(ServiceReference behavior) {
-		String name = behavior.getProperty("osgi.service.blueprint.compname").toString();
+		String name = behavior.getProperty(OSGI_SERVICE_BLUEPRINT_COMPNAME).toString();
 		delegateMap.put(name, behavior);
 		LOGGER.info("Added Activiti behavior to behavior cache " + name);
 	}
 
 	public void unbindBehaviour(ServiceReference behavior) {
-		String name = behavior.getProperty("osgi.service.blueprint.compname").toString();
+		if(behavior == null || behavior.getProperty(OSGI_SERVICE_BLUEPRINT_COMPNAME) == null){
+			LOGGER.warning("Couldn't remove behavior because of null value: " + String.valueOf(behavior));
+			return;
+		}
+		String name = behavior.getProperty(OSGI_SERVICE_BLUEPRINT_COMPNAME).toString();
 		if (delegateMap.containsKey(name)) {
 			delegateMap.remove(name);
 		}
