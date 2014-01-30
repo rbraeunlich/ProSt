@@ -28,7 +28,7 @@ public class FileUploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private final String dataDir = System
-			.getProperty(UploadKonstanten.JBOSS_DATA_ORDNER_PROP);
+			.getProperty(UploadKonstanten.PROST_DATA_DIR_PROP);
 
 	private File activitiDir = null;
 
@@ -43,7 +43,7 @@ public class FileUploadServlet extends HttpServlet {
 	public void init() throws ServletException {
 		super.init();
 		activitiDir = new File(new File(dataDir),
-				UploadKonstanten.ACTIVITI_DATA_ORDNER_NAME);
+				UploadKonstanten.PROST_DATA_DIR_NAME);
 		activitiDir.mkdirs();
 	}
 
