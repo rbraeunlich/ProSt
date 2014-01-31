@@ -22,7 +22,7 @@ Import-Package: de.blogspot.wrongtracks.prost.ejb.api,
  org.activiti.engine.impl.form;version="[5.12.1,6.0.0)",
  org.osgi.framework,
  org.osgi.util.tracker,
- org.apache.commons.lang3.tuple;version="[3.0.0,4.0.0)",
+ org.apache.commons.lang3.tuple;version="[3.0.0,4.0.0)"
 Bundle-SymbolicName: de.blogspot.wrongtracks.prost.prost-ejb
 Bundle-ClassPath: .
 Export-EJB: 
