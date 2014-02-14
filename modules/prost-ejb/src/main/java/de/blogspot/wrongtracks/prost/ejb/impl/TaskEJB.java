@@ -12,7 +12,6 @@ import java.util.Properties;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.annotation.Resource;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
@@ -31,6 +30,7 @@ import org.activiti.engine.task.Task;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
 
 import de.blogspot.wrongtracks.prost.ejb.api.TaskEJBRemote;
@@ -44,8 +44,8 @@ import de.blogspot.wrongtracks.prost.msg.api.MessageToClientService;
 @Stateless(name = "TaskEJB")
 public class TaskEJB implements TaskEJBRemote {
 
-	@Resource
-	private BundleContext context;
+//	@Resource
+	private BundleContext context=FrameworkUtil.getBundle(getClass()).getBundleContext();
 	private final Properties props = new Properties();
 	private ServiceTracker taskServiceTracker;
 	private ServiceTracker formServiceTracker;

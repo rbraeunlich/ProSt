@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.annotation.Resource;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
@@ -14,6 +13,7 @@ import org.activiti.engine.HistoryService;
 import org.activiti.engine.history.HistoricDetail;
 import org.activiti.engine.history.HistoricFormProperty;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
 
 import de.blogspot.wrongtracks.prost.ejb.api.HistoryEJBRemote;
@@ -25,8 +25,8 @@ import de.blogspot.wrongtracks.prost.ejb.transfer.impl.HistoricFormPropertyInfoI
 @Stateless(name = "HistoryEJB")
 public class HistoryEJB implements HistoryEJBRemote {
 
-	@Resource
-	private BundleContext context;
+//	@Resource
+	private BundleContext context = FrameworkUtil.getBundle(getClass()).getBundleContext();
 
 	private ServiceTracker historyServiceTracker;
 

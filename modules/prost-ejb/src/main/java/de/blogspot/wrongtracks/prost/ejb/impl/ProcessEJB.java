@@ -8,7 +8,6 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.annotation.Resource;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
@@ -19,6 +18,7 @@ import org.activiti.engine.RuntimeService;
 import org.activiti.engine.form.FormProperty;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
 import org.osgi.util.tracker.ServiceTracker;
 
 import de.blogspot.wrongtracks.prost.ejb.api.ProcessEJBRemote;
@@ -43,8 +43,7 @@ public class ProcessEJB implements ProcessEJBRemote {
 
 	private ServiceTracker historyServiceTracker;
 
-	@Resource
-	private BundleContext context;
+	private BundleContext context=FrameworkUtil.getBundle(getClass()).getBundleContext();
 
 	/**
 	 * Default constructor.
